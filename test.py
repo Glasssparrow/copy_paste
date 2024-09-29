@@ -4,4 +4,4 @@ from Code.get_list_of_folders_or_files import (
 from Code.order import get_orders
 
 
-orders = get_orders()
+orders = get_orders("Data")
