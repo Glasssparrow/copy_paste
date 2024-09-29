@@ -1,17 +1,17 @@
 import os
 
 
-def get_list_of_folders_names(directory_name):
+def get_list_of_folders_names(relative_path):
     # get all files' and folders' names in the current directory
-    filenames = os.listdir(directory_name)
+    filenames = os.listdir(relative_path)
 
     result = []
     for filename in filenames:  # loop through all the files and folders
         path = os.path.join(
-            os.path.abspath(directory_name), filename
+            os.path.abspath(relative_path), filename
         )
         if os.path.isdir(os.path.join(
-                directory_name, filename
+                relative_path, filename
         )):  # check whether the current object is a folder or not
             result.append(filename)
 
@@ -19,17 +19,17 @@ def get_list_of_folders_names(directory_name):
     return result
 
 
-def get_list_of_files_names(directory_name):
+def get_list_of_files_names(relative_path):
     # get all files' and folders' names in the current directory
-    filenames = os.listdir(directory_name)
+    filenames = os.listdir(relative_path)
 
     result = []
     for filename in filenames:  # loop through all the files and folders
         path = os.path.join(
-            os.path.abspath(directory_name), filename
+            os.path.abspath(relative_path), filename
         )
         if not os.path.isdir(os.path.join(
-                directory_name, filename
+                relative_path, filename
         )):  # check whether the current object is a folder or not
             result.append(filename)
 
