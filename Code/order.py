@@ -5,6 +5,11 @@ from Code.get_list_of_folders_or_files import (
 from Code.get_list_of_string_from_file import (
     get_list_of_strings_from_file,
 )
+from CONSTANTS import (
+    TARGET_DIRECTORIES_STORAGE,
+    FILE_EXTENSIONS_STORAGE,
+    LAST_PARTS_OF_NAMES_STORAGE,
+)
 import os
 
 
