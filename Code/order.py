@@ -13,3 +13,5 @@ class Order:
 
 def get_orders():
     folders_with_orders = get_list_of_folders_names("Data")
+    for folder in folders_with_orders:
+        pass
