@@ -15,13 +15,43 @@ import os
 
 class Order:
 
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.target = None
         self.names = None
         self.extensions = None
 
-    def should_be_copied(self, file_name):
-        pass
+    def should_be_copied(self, name_with_extension, full_path=False):
+        if full_path:
+            name_with_extension = os.path.basename(
+                name_with_extension)
+        # Если ограничений совсем нет, то что-то не так.
+        if (
+            not self.names and
+            not self.extensions
+        ):
+            raise Exception(
+                f"Не найдены правила для {self.name}"
+            )
+        # Проверяем проходит ли расширение
+        extension_fit = False
+        for extension in self.extensions:
+            file_extension = os.path.splitext(name_with_extension)[1]
+            if file_extension == extension:
+                extension_fit = True
+        # Проверяем проходит ли имя
+        name_fit = False
+        for name_requirement in self.names:
+            file_name = os.path.splitext(name_with_extension)[0]
+            if file_name[-len(name_requirement):] == name_requirement:
+                name_fit = True
+
+        # Если оба условия выполняются или отсутствуют, то
+        # возвращаем True.
+        if not self.names or name_fit:
+            if not self.extensions or extension_fit:
+                return True
+        return False
 
 
 def get_orders(relative_path):
@@ -38,7 +68,7 @@ def get_orders(relative_path):
                 FILE_EXTENSIONS_STORAGE in files and
                 LAST_PARTS_OF_NAMES_STORAGE in files
         ):
-            order = Order()
+            order = Order(folder)
         else:
             files_not_found = []
             if TARGET_DIRECTORIES_STORAGE not in files:
