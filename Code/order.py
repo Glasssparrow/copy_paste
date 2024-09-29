@@ -14,8 +14,13 @@ class Order:
         pass
 
 
-def get_orders():
-    folders_with_orders = get_list_of_folders_names("Data")
+def get_orders(relative_path):
+    folders_with_orders = get_list_of_folders_names(relative_path)
     for folder in folders_with_orders:
-        path = os.path.join("Data", folder)
+        path = os.path.join(relative_path, folder)
         files = get_list_of_files_names(path)
+        for file_name in files:
+            path_to_file = os.path.join(
+                relative_path,
+                file_name,
+            )
