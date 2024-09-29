@@ -16,7 +16,9 @@ import os
 class Order:
 
     def __init__(self):
-        pass
+        self.target = None
+        self.names = None
+        self.extensions = None
 
 
 def get_orders(relative_path):
@@ -52,6 +54,7 @@ def get_orders(relative_path):
             TARGET_DIRECTORIES_STORAGE,
         )
         text_list = get_list_of_strings_from_file(target_directories_path)
+        order.target = text_list
         # Записываем в order допустимые расширения.
         file_extensions_path = os.path.join(
             relative_path,
@@ -59,6 +62,7 @@ def get_orders(relative_path):
             FILE_EXTENSIONS_STORAGE,
         )
         text_list = get_list_of_strings_from_file(file_extensions_path)
+        order.extensions = text_list
         # Записываем в order допустимые окончания имен.
         for_names_path = os.path.join(
             relative_path,
@@ -66,3 +70,4 @@ def get_orders(relative_path):
             LAST_PARTS_OF_NAMES_STORAGE,
         )
         text_list = get_list_of_strings_from_file(for_names_path)
+        order.names = text_list
