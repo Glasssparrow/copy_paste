@@ -22,5 +22,7 @@ def get_orders(relative_path):
         for file_name in files:
             path_to_file = os.path.join(
                 relative_path,
+                folder,
                 file_name,
             )
+            text_list = get_list_of_strings_from_file(path_to_file)
