@@ -20,6 +20,9 @@ class Order:
         self.names = None
         self.extensions = None
 
+    def should_be_copied(self, file_name):
+        pass
+
 
 def get_orders(relative_path):
     folders_with_orders = get_list_of_folders_names(relative_path)
