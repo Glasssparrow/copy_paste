@@ -76,6 +76,8 @@ class Gui:
         self._text_warning.configure(
             text=new_text,
         )
+        self.folders_for_copy = folders_for_copy
+        self.files_for_copy = files_for_copy
 
 
     def _calculate(self):
