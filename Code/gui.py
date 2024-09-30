@@ -69,7 +69,7 @@ class Gui:
 
         # Кнопка выбора папки
         self._folder_selection_button = Button(
-                self._window, text="Выбрать папку для печати",
+                self._window, text="Выбрать папку с исходными файлами",
                 width=width * 6 + 6,
                 command=self._choose_folder,
                 bg="green",
@@ -92,7 +92,7 @@ class Gui:
 
         # Кнопка расчета
         self._calculate_button = Button(
-            self._window, text="Рассчитать",
+            self._window, text="Ctr+C, Ctr+V",
             width=width * 6 + 6,
             command=self._calculate,
             bg="green",
@@ -112,7 +112,7 @@ class Gui:
 
         # Текст ошибки
         self._text_warning = (
-            Label(text="Расчет еще не выполнялся"))
+            Label(text="Копирование еще не выполнялось"))
         self._text_warning.grid(columnspan=6,
                                 column=0, row=5)
 
