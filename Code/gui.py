@@ -16,19 +16,6 @@ class Gui:
 
     title_text = "Копипастер 1.0"
 
-    # Функция нужна для формирования пути к папке из пути к файлу.
-    @staticmethod
-    def _cut_filename(path_to_file):
-        """
-        Обрабатывает путь к файлу в формате - ххх/ххх/file.file.
-        Отсекает часть /file.file оставляя ххх/ххх
-        """
-        split = path_to_file.split("/")
-        # Получаем длину последнего фрагмента после "/".
-        # Прибавляем единицу т.к. "/" тоже убираем.
-        delete = len(split[len(split)-1])+1
-        return path_to_file[:-delete]
-
 
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
