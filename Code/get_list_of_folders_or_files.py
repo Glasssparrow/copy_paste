@@ -2,7 +2,12 @@ import os
 
 
 def list_dir(relative_path):
-    filenames = os.listdir(relative_path)
+    try:
+        filenames = os.listdir(relative_path)
+    except Exception:
+        raise Exception(
+                f"Не удается найти относительный путь {relative_path}"
+            )
     return filenames
 
 
