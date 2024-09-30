@@ -27,18 +27,21 @@ class Gui:
         Функция выбора папки в которую будет выводиться файл с выполненными
         расчетами.
         """
-        self.output_path = (
-            fd.askdirectory(title="Выберите папку",
-                            initialdir=self.output_path)
+        self.initial_directory = (
+            fd.askdirectory(
+                title="Выберите папку",
+                initialdir=self.initial_directory)
         )
-        self._text_folder.configure(text=self.output_path)
+        self._text_folder.configure(text=self.initial_directory)
 
 
     def _calculate(self):
         pass
 
 
-    def __init__(self):
+    def __init__(self, orders, initial_directory):
+        # Исходная папка
+        self.initial_directory = initial_directory
         # Оформление окна
         self._window = Tk()
         self._window.title(self.title_text)
