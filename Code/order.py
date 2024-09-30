@@ -9,6 +9,7 @@ from Code.CONSTANTS import (
     TARGET_DIRECTORIES_STORAGE,
     FILE_EXTENSIONS_STORAGE,
     LAST_PARTS_OF_NAMES_STORAGE,
+    TARGET_FOLDER_STORAGE,
 )
 import os
 
@@ -20,6 +21,7 @@ class Order:
         self.target = None
         self.names = None
         self.extensions = None
+        self.target_folder = None
 
     def should_be_copied(self, name_with_extension, full_path=False):
         if full_path:
@@ -56,6 +58,7 @@ class Order:
 
 def get_orders(relative_path):
     folders_with_orders = get_list_of_folders_names(relative_path)
+    orders = []
     for folder in folders_with_orders:
         path = os.path.join(relative_path, folder)
         files = get_list_of_files_names(path)
@@ -66,9 +69,11 @@ def get_orders(relative_path):
         if (
                 TARGET_DIRECTORIES_STORAGE in files and
                 FILE_EXTENSIONS_STORAGE in files and
-                LAST_PARTS_OF_NAMES_STORAGE in files
+                LAST_PARTS_OF_NAMES_STORAGE in files and
+                TARGET_FOLDER_STORAGE in files
         ):
             order = Order(folder)
+            orders.append(order)
         else:
             files_not_found = []
             if TARGET_DIRECTORIES_STORAGE not in files:
@@ -77,6 +82,8 @@ def get_orders(relative_path):
                 files_not_found.append(FILE_EXTENSIONS_STORAGE)
             if LAST_PARTS_OF_NAMES_STORAGE not in files:
                 files_not_found.append(LAST_PARTS_OF_NAMES_STORAGE)
+            if TARGET_FOLDER_STORAGE not in files:
+                files_not_found.append(TARGET_FOLDER_STORAGE)
             raise Exception(
                 f"Не хватает файлов {files_not_found} в папке {folder}."
             )
@@ -88,6 +95,13 @@ def get_orders(relative_path):
         )
         text_list = get_list_of_strings_from_file(target_directories_path)
         order.target = text_list
+        target_folder = os.path.join(
+            relative_path,
+            folder,
+            TARGET_FOLDER_STORAGE,
+        )
+        text_list = get_list_of_strings_from_file(target_folder)
+        order.target_folder = text_list
         # Записываем в order допустимые расширения.
         file_extensions_path = os.path.join(
             relative_path,
@@ -104,3 +118,4 @@ def get_orders(relative_path):
         )
         text_list = get_list_of_strings_from_file(for_names_path)
         order.names = text_list
+    return orders
