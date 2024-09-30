@@ -56,13 +56,13 @@ class Gui:
         if folders_for_copy:
             new_text += "ПАПКИ, КОТОРЫЕ БУДУТ КОПИРОВАНЫ:\n"
             for k, v in folders_for_copy.items():
-                new_text += f"копируется папка {k}\n"
+                new_text += f"{k}\n"
                 for directory in v:
                     new_text += f"путь: {directory}\n"
         if files_for_copy:
             new_text += "ФАЙЛЫ, КОТОРЫЕ БУДУТ КОПИРОВАНЫ:\n"
             for k, v in files_for_copy.items():
-                new_text += f"копируется файл {k}\n"
+                new_text += f"{k}\n"
                 for directory in v:
                     new_text += f"путь: {directory}\n"
         self._text_warning.configure(
@@ -82,7 +82,7 @@ class Gui:
         if self.folders_for_copy:
             new_text += "ПАПКИ, результат копирования:\n"
         for folder_name, targets in self.folders_for_copy.items():
-            new_text += f"копирование папки {folder_name}\n"
+            new_text += f"{folder_name}\n"
             source = os.path.join(
                 os.path.normpath(self.initial_directory),
                 folder_name,
@@ -96,7 +96,7 @@ class Gui:
         if self.files_for_copy:
             new_text += "ФАЙЛЫ, результат копирования:\n"
         for file_name, targets in self.files_for_copy.items():
-            new_text += f"копирование файла {file_name}\n"
+            new_text += f"{file_name}\n"
             source = os.path.join(
                 os.path.normpath(self.initial_directory),
                 file_name,
@@ -124,15 +124,15 @@ class Gui:
         # Оформление окна
         self._window = Tk()
         self._window.title(self.title_text)
-        self._window.geometry("480x300")
+        self._window.geometry("960x300")
         # Ширина для кнопок
-        width = 10
+        width = 20
 
 
         # Кнопка выбора папки
         self._folder_selection_button = Button(
                 self._window, text="Выбрать папку с исходными файлами",
-                width=width * 6 + 6,
+                width=width * 6 + 12,
                 command=self._choose_folder,
                 bg="green",
             )
@@ -155,7 +155,7 @@ class Gui:
         # Кнопка расчета
         self._calculate_button = Button(
             self._window, text="Ctr+C, Ctr+V",
-            width=width * 6 + 6,
+            width=width * 6 + 12,
             command=self._calculate,
             bg="green",
             )
