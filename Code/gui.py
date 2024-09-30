@@ -48,13 +48,14 @@ class Gui:
 
 
         # Кнопка выбора папки
-        self._folder_selection_button = (
-            Button(self._window, text="Выбрать папку для печати",
-                   width=width * 6 + 6,
-                   command=self._choose_folder)
-        )
+        self._folder_selection_button = Button(
+                self._window, text="Выбрать папку для печати",
+                width=width * 6 + 6,
+                command=self._choose_folder,
+                bg="green",
+            )
         self._folder_selection_button.grid(
-            columnspan=6, column=0, row=0
+            columnspan=6, column=0, row=0,
             )
 
         # Текст названия выбранной папки
@@ -74,19 +75,10 @@ class Gui:
             self._window, text="Рассчитать",
             width=width * 6 + 6,
             command=self._calculate,
-            bg="green"
+            bg="green",
             )
         self._calculate_button.grid(columnspan=6, column=0,
                                     row=3)
-
-        self.allow_nodes_without_quantity = BooleanVar(value=True)
-
-        self._checkbutton = Checkbutton(
-            self._window, text="заглушка",
-            variable=self.allow_nodes_without_quantity,
-            onvalue=True, offvalue=False,
-        )
-        self._checkbutton.grid(column=0, row=4)
 
         # Текст ошибки
         self._text_warning = (
