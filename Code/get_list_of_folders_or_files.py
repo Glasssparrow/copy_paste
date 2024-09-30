@@ -1,9 +1,14 @@
 import os
 
 
+def list_dir(relative_path):
+    filenames = os.listdir(relative_path)
+    return filenames
+
+
 def get_list_of_folders_names(relative_path):
     # get all files' and folders' names in the current directory
-    filenames = os.listdir(relative_path)
+    filenames = list_dir(relative_path)
 
     result = []
     for filename in filenames:  # loop through all the files and folders
@@ -21,7 +26,7 @@ def get_list_of_folders_names(relative_path):
 
 def get_list_of_files_names(relative_path):
     # get all files' and folders' names in the current directory
-    filenames = os.listdir(relative_path)
+    filenames = list_dir(relative_path)
 
     result = []
     for filename in filenames:  # loop through all the files and folders
