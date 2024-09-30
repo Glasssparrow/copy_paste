@@ -42,19 +42,19 @@ class Gui:
         # Оформление окна
         self._window = Tk()
         self._window.title(self.title_text)
-        self._window.geometry("500x200")
+        self._window.geometry("480x200")
         # Ширина для кнопок
-        width = 12
+        width = 10
 
 
         # Кнопка выбора папки
         self._folder_selection_button = (
             Button(self._window, text="Выбрать папку для печати",
-                   width=width * 2 + 2,
+                   width=width * 6 + 6,
                    command=self._choose_folder)
         )
         self._folder_selection_button.grid(
-            columnspan=2, column=0, row=0
+            columnspan=6, column=0, row=0
             )
 
         # Текст названия выбранной папки
@@ -82,7 +82,7 @@ class Gui:
         self.allow_nodes_without_quantity = BooleanVar(value=True)
 
         self._checkbutton = Checkbutton(
-            self._window, text="доп. узлы",
+            self._window, text="заглушка",
             variable=self.allow_nodes_without_quantity,
             onvalue=True, offvalue=False,
         )
