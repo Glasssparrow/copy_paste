@@ -1,6 +1,10 @@
 from tkinter import filedialog as fd
 from tkinter import Button, Tk, Label, Checkbutton, BooleanVar
 from datetime import datetime
+from Code.get_list_of_folders_or_files import (
+    get_list_of_folders_names,
+    get_list_of_files_names,
+)
 
 
 class Gui:
@@ -33,6 +37,8 @@ class Gui:
                 initialdir=self.initial_directory)
         )
         self._text_folder.configure(text=self.initial_directory)
+        folders = get_list_of_folders_names(self.initial_directory)
+        files = get_list_of_files_names(self.initial_directory)
 
 
     def _calculate(self):
