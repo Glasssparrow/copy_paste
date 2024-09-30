@@ -35,23 +35,29 @@ class Gui:
         for folder in folders:
             for order in self.orders:
                 if order.should_be_copied(folder):
-                    folders_for_copy[folder] = order.get_paths(
+                    paths = order.get_paths(
                         directory=self.initial_directory,
                         name_of_file_or_folder=folder,
                         into_folder_with_same_name=self.in_same_folder.get(),
                         file_name=folder,
                         )
+                    folders_for_copy[folder] = folders_for_copy.get(folder, [])
+                    for path in paths:
+                        folders_for_copy[folder].append(path)
                     
         files = get_list_of_files_names(self.initial_directory)
         for file in files:
             for order in self.orders:
                 if order.should_be_copied(file):
-                    files_for_copy[file] = order.get_paths(
+                    paths = order.get_paths(
                         directory=self.initial_directory,
                         name_of_file_or_folder=file,
                         into_folder_with_same_name=self.in_same_folder.get(),
                         file_name=file,
                         )
+                    files_for_copy[file] = files_for_copy.get(file, [])
+                    for path in paths:
+                        files_for_copy[file].append(path)
         new_text = ""
         if folders_for_copy:
             new_text += "ПАПКИ, КОТОРЫЕ БУДУТ КОПИРОВАНЫ:\n"
