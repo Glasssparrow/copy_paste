@@ -60,6 +60,22 @@ class Gui:
                         into_folder_with_same_name=self.in_same_folder.get(),
                         file_name=file,
                         )
+        new_text = ""
+        if folders_for_copy:
+            new_text += "ПАПКИ, КОТОРЫЕ БУДУТ КОПИРОВАНЫ:\n"
+            for k, v in folders_for_copy.items():
+                new_text += f"копируется папка {k}\n"
+                for directory in v:
+                    new_text += f"путь: {directory}\n"
+        if files_for_copy:
+            new_text += "ФАЙЛЫ, КОТОРЫЕ БУДУТ КОПИРОВАНЫ:\n"
+            for k, v in files_for_copy.items():
+                new_text += f"копируется файл {k}\n"
+                for directory in v:
+                    new_text += f"путь: {directory}\n"
+        self._text_warning.configure(
+            text=new_text,
+        )
 
 
     def _calculate(self):
