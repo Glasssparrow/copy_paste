@@ -41,22 +41,24 @@ class Gui:
         folders_for_copy = {}
         files_for_copy = {}
         for folder in folders:
-            for order in orders:
+            for order in self.orders:
                 if order.should_be_copied(folder):
                     folders_for_copy[folder] = order.get_paths(
                         directory=self.initial_directory,
                         name_of_file_or_folder=folder,
                         into_folder_with_same_name=self.in_same_folder.get(),
+                        file_name=folder,
                         )
                     
         files = get_list_of_files_names(self.initial_directory)
         for file in files:
-            for order in orders:
+            for order in self.orders:
                 if order.should_be_copied(file):
-                    folders_for_copy[file] = order.get_paths(
+                    files_for_copy[file] = order.get_paths(
                         directory=self.initial_directory,
                         name_of_file_or_folder=file,
                         into_folder_with_same_name=self.in_same_folder.get(),
+                        file_name=file,
                         )
 
 

@@ -55,13 +55,63 @@ class Order:
                 return True
         return False
 
+
+    @staticmethod
+    def create_path(
+        main_directory,
+        last_folder,
+        additional_directory,
+        into_folder_with_same_name,
+        file_name,
+    ):
+        if into_folder_with_same_name:
+            path = os.path.join(
+                main_directory,
+                last_folder,
+                additional_directory,
+                file_name,
+            )
+        else:
+            path = os.path.join(
+                main_directory,
+                additional_directory,
+                file_name,
+            )
+        return path
+
     def get_paths(
             self,
             directory,
             name_of_file_or_folder,
             into_folder_with_same_name,
+            file_name,
         ):
+        # normpath - нормализует путь (убирает / в конце если он есть).
+        # / может сломать basename.
+        # basename возвращает последнюю часть пути.
+        last_folder = os.path.basename(os.path.normpath(
+            directory,
+            ))
         paths = []
+        for main_directory in self.target:
+            if not self.target_folder:
+                path = self.create_path(
+                    main_directory=main_directory,
+                    last_folder=last_folder,
+                    additional_directory="",
+                    into_folder_with_same_name=into_folder_with_same_name,
+                    file_name=file_name,
+                )
+                paths.append(path)
+            for additional_directory in self.target_folder:
+                path = self.create_path(
+                    main_directory=main_directory,
+                    last_folder=last_folder,
+                    additional_directory=additional_directory,
+                    into_folder_with_same_name=into_folder_with_same_name,
+                    file_name=file_name,
+                )
+                paths.append(path)
         return paths
 
 
