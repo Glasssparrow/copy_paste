@@ -73,25 +73,48 @@ class Gui:
 
 
     def _calculate(self):
+        new_text = ""
         if not self.in_same_folder.get():
             self._text_warning.configure(
                 text="Копировать в общую папку проектов нельзя."
                 )
             return
+        if self.folders_for_copy:
+            new_text += "ПАПКИ, результат копирования:\n"
         for folder_name, targets in self.folders_for_copy.items():
+            new_text += f"копирование папки {folder_name}\n"
             source = os.path.join(
                 os.path.normpath(self.initial_directory),
                 folder_name,
             )
             for target in targets:
-                copy_folder(source, target)
+                try:
+                    copy_folder(source, target)
+                    new_text += f"{target} - успешно.\n"
+                except:
+                    new_text += f"{target} - НЕУДАЧНО.\n"
+        if self.files_for_copy:
+            new_text += "ФАЙЛЫ, результат копирования:\n"
         for file_name, targets in self.files_for_copy.items():
+            new_text += f"копирование файла {file_name}\n"
             source = os.path.join(
                 os.path.normpath(self.initial_directory),
                 file_name,
             )
             for target in targets:
-                copy_file(source, target)
+                try:
+                    copy_file(source, target)
+                    new_text += f"{target} - успешно.\n"
+                except:
+                    new_text += f"{target} - НЕУДАЧНО.\n"
+        if new_text:
+            self._text_warning.configure(
+                text=new_text,
+            )
+        else:
+            self._text_warning.configure(
+                text="Что-то пошло не так. =\\",
+            )
 
 
     def __init__(self, orders, initial_directory):
