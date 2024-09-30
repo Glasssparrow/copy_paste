@@ -38,7 +38,13 @@ class Gui:
         )
         self._text_folder.configure(text=self.initial_directory)
         folders = get_list_of_folders_names(self.initial_directory)
+        folders_to_copy = {}
+        files_to_cope = {}
+        for folder in folders:
+            pass
         files = get_list_of_files_names(self.initial_directory)
+        for file in files:
+            pass
 
 
     def _calculate(self):
@@ -52,6 +58,7 @@ class Gui:
     def __init__(self, orders, initial_directory):
         # Исходная папка
         self.initial_directory = initial_directory
+        self.orders = orders
         # Оформление окна
         self._window = Tk()
         self._window.title(self.title_text)
