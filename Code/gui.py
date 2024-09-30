@@ -1,9 +1,14 @@
 from tkinter import filedialog as fd
 from tkinter import Button, Tk, Label, Checkbutton, BooleanVar
 from datetime import datetime
+import os
 from Code.get_list_of_folders_or_files import (
     get_list_of_folders_names,
     get_list_of_files_names,
+)
+from Code.copy_folder_or_file import (
+    copy_folder,
+    copy_file,
 )
 
 
@@ -86,6 +91,20 @@ class Gui:
                 text="Копировать в общую папку проектов нельзя."
                 )
             return
+        for folder_name, targets in self.folders_for_copy.items():
+            source = os.path.join(
+                os.path.normpath(self.initial_directory),
+                folder_name,
+            )
+            for target in targets:
+                copy_folder(source, target)
+        for file_name, targets in self.files_for_copy.items():
+            source = os.path.join(
+                os.path.normpath(self.initial_directory),
+                file_name,
+            )
+            for target in targets:
+                copy_file(source, target)
 
 
     def __init__(self, orders, initial_directory):
