@@ -55,6 +55,15 @@ class Order:
                 return True
         return False
 
+    def get_paths(
+            self,
+            directory,
+            name_of_file_or_folder,
+            into_folder_with_same_name,
+        ):
+        paths = []
+        return paths
+
 
 def get_orders(relative_path):
     folders_with_orders = get_list_of_folders_names(relative_path)
