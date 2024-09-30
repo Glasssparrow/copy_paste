@@ -40,6 +40,7 @@ class Gui:
             self._text_warning.configure(
                 text="Копировать в общую папку проектов нельзя."
                 )
+            return
 
 
     def __init__(self, orders, initial_directory):
@@ -48,7 +49,7 @@ class Gui:
         # Оформление окна
         self._window = Tk()
         self._window.title(self.title_text)
-        self._window.geometry("480x200")
+        self._window.geometry("480x300")
         # Ширина для кнопок
         width = 10
 
