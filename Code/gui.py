@@ -36,7 +36,10 @@ class Gui:
 
 
     def _calculate(self):
-        pass
+        if not self.in_same_folder.get():
+            self._text_warning.configure(
+                text="Копировать в общую папку проектов нельзя."
+                )
 
 
     def __init__(self, orders, initial_directory):
@@ -82,6 +85,16 @@ class Gui:
             )
         self._calculate_button.grid(columnspan=6, column=0,
                                     row=3)
+
+        # Условия
+        self.in_same_folder = BooleanVar(value=True)
+
+        self._checkbutton = Checkbutton(
+            self._window, text="В папке с тем же названием",
+            variable=self.in_same_folder,
+            onvalue=True, offvalue=False,
+        )
+        self._checkbutton.grid(column=0, row=4)
 
         # Текст ошибки
         self._text_warning = (
