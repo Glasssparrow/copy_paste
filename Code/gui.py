@@ -124,7 +124,7 @@ class Gui:
         # Оформление окна
         self._window = Tk()
         self._window.title(self.title_text)
-        self._window.geometry("960x300")
+        self._window.geometry("960x500")
         # Ширина для кнопок
         width = 20
 
