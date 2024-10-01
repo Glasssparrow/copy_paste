@@ -61,29 +61,20 @@ class Order:
         main_directory,
         last_folder,
         additional_directory,
-        into_folder_with_same_name,
         file_name,
     ):
-        if into_folder_with_same_name:
-            path = os.path.join(
-                main_directory,
-                last_folder,
-                additional_directory,
-                file_name,
-            )
-        else:
-            path = os.path.join(
-                main_directory,
-                additional_directory,
-                file_name,
-            )
+        path = os.path.join(
+            main_directory,
+            last_folder,
+            additional_directory,
+            file_name,
+        )
         return path
 
     def get_paths(
             self,
             directory,
             name_of_file_or_folder,
-            into_folder_with_same_name,
             file_name,
         ):
         # normpath - нормализует путь (убирает / в конце если он есть).
@@ -99,7 +90,6 @@ class Order:
                     main_directory=main_directory,
                     last_folder=last_folder,
                     additional_directory="",
-                    into_folder_with_same_name=into_folder_with_same_name,
                     file_name=file_name,
                 )
                 paths.append(path)
@@ -108,7 +98,6 @@ class Order:
                     main_directory=main_directory,
                     last_folder=last_folder,
                     additional_directory=additional_directory,
-                    into_folder_with_same_name=into_folder_with_same_name,
                     file_name=file_name,
                 )
                 paths.append(path)

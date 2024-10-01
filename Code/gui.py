@@ -38,7 +38,6 @@ class Gui:
                     paths = order.get_paths(
                         directory=self.initial_directory,
                         name_of_file_or_folder=folder,
-                        into_folder_with_same_name=self.in_same_folder.get(),
                         file_name=folder,
                         )
                     folders_for_copy[folder] = folders_for_copy.get(folder, [])
@@ -52,7 +51,6 @@ class Gui:
                     paths = order.get_paths(
                         directory=self.initial_directory,
                         name_of_file_or_folder=file,
-                        into_folder_with_same_name=self.in_same_folder.get(),
                         file_name=file,
                         )
                     files_for_copy[file] = files_for_copy.get(file, [])
@@ -80,11 +78,6 @@ class Gui:
 
     def _calculate(self):
         new_text = ""
-        if not self.in_same_folder.get():
-            self._text_warning.configure(
-                text="Копировать в общую папку проектов нельзя."
-                )
-            return
         if self.folders_for_copy:
             new_text += "ПАПКИ, результат копирования:\n"
         for folder_name, targets in self.folders_for_copy.items():
@@ -99,6 +92,7 @@ class Gui:
                     new_text += f"{target} - успешно.\n"
                 except:
                     new_text += f"{target} - НЕУДАЧНО.\n"
+                    raise
         if self.files_for_copy:
             new_text += "ФАЙЛЫ, результат копирования:\n"
         for file_name, targets in self.files_for_copy.items():
@@ -168,15 +162,6 @@ class Gui:
         self._calculate_button.grid(columnspan=6, column=0,
                                     row=3)
 
-        # Условия
-        self.in_same_folder = BooleanVar(value=True)
-
-        self._checkbutton = Checkbutton(
-            self._window, text="В папке с тем же названием",
-            variable=self.in_same_folder,
-            onvalue=True, offvalue=False,
-        )
-        self._checkbutton.grid(column=0, row=4)
 
         # Текст ошибки
         self._text_warning = (
