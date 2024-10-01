@@ -24,6 +24,7 @@ class Order:
         self.target_folder = None
 
     def should_be_copied(self, name_with_extension, full_path=False):
+        # Если получили полный путь, то отделяем имя.
         if full_path:
             name_with_extension = os.path.basename(
                 name_with_extension)
@@ -38,12 +39,16 @@ class Order:
         # Проверяем проходит ли расширение
         extension_fit = False
         for extension in self.extensions:
+            # Расширение должно совпадать с 
+            # правилом на копирование.
             file_extension = os.path.splitext(name_with_extension)[1]
             if file_extension == extension:
                 extension_fit = True
         # Проверяем проходит ли имя
         name_fit = False
         for name_requirement in self.names:
+            # Окончание имени должно совпадать с 
+            # правилом на копирование.
             file_name = os.path.splitext(name_with_extension)[0]
             if file_name[-len(name_requirement):] == name_requirement:
                 name_fit = True
@@ -63,6 +68,8 @@ class Order:
         additional_directory,
         file_name,
     ):
+        # Собираем вместе
+        # папка_куда_копировать/папка_проекта/доп_папки/назв_файла
         path = os.path.join(
             main_directory,
             last_folder,
@@ -84,8 +91,10 @@ class Order:
             directory,
             ))
         paths = []
+        # Проходим по целевым папкам для копирования
         for main_directory in self.target:
             if not self.target_folder:
+                # Если подпапок нет
                 path = self.create_path(
                     main_directory=main_directory,
                     last_folder=last_folder,
@@ -93,6 +102,7 @@ class Order:
                     file_name=file_name,
                 )
                 paths.append(path)
+            # Каждой подпапке по пути.
             for additional_directory in self.target_folder:
                 path = self.create_path(
                     main_directory=main_directory,
@@ -107,6 +117,7 @@ class Order:
 def get_orders(relative_path):
     folders_with_orders = get_list_of_folders_names(relative_path)
     orders = []
+    # Проходим по всем папкам с правилами для копирования.
     for folder in folders_with_orders:
         path = os.path.join(relative_path, folder)
         files = get_list_of_files_names(path)
@@ -123,6 +134,7 @@ def get_orders(relative_path):
             order = Order(folder)
             orders.append(order)
         else:
+            # Если что-то не нашли в правиле - исключение.
             files_not_found = []
             if TARGET_DIRECTORIES_STORAGE not in files:
                 files_not_found.append(TARGET_DIRECTORIES_STORAGE)

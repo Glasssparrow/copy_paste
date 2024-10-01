@@ -11,6 +11,7 @@ class ErrorGui:
         self._window = Tk()
         self._window.title(self.title_text)
         self._window.geometry("500x100")
+        # Записываем данные об ошибке из исключения.
         self.message_text = ""
         for tuple_element in message_tuple:
             self.message_text += tuple_element

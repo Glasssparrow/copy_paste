@@ -20,42 +20,54 @@ class Gui:
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
         """
-        Функция выбора папки в которую будет выводиться файл с выполненными
-        расчетами.
+        Функция выбора папки в которой хранятся исходные файлы для копирования.
         """
+        # Вызываем метод tkinter'а для окна выбора папки.
         self.initial_directory = (
             fd.askdirectory(
                 title="Выберите папку",
                 initialdir=self.initial_directory)
         )
+        # Показываем путь пользователю.
         self._text_folder.configure(text=self.initial_directory)
+        # Получаем список папок в папке с исходными данными.
         folders = get_list_of_folders_names(self.initial_directory)
+        # переменные в которые записываем результат.
         folders_for_copy = {}
         files_for_copy = {}
         for folder in folders:
             for order in self.orders:
+                # Проверяем каждое правило копирования.
                 if order.should_be_copied(folder):
+                    # Если нужно копировать добавляем пути в список
+                    # на копирование для этой папки.
                     paths = order.get_paths(
                         directory=self.initial_directory,
                         name_of_file_or_folder=folder,
                         file_name=folder,
-                        )
+                        )  # метод возвращает лист путей в которые копировать.
                     folders_for_copy[folder] = folders_for_copy.get(folder, [])
                     for path in paths:
                         folders_for_copy[folder].append(path)
-                    
+
+        # Получаем список файлов в папке с исходными данными.
         files = get_list_of_files_names(self.initial_directory)
         for file in files:
             for order in self.orders:
+                # Проверяем каждое правило копирования.
                 if order.should_be_copied(file):
+                    # Если нужно копировать добавляем пути в список
+                    # на копирование для этой папки.
                     paths = order.get_paths(
                         directory=self.initial_directory,
                         name_of_file_or_folder=file,
                         file_name=file,
-                        )
+                        )  # метод возвращает лист путей в которые копировать.
                     files_for_copy[file] = files_for_copy.get(file, [])
                     for path in paths:
                         files_for_copy[file].append(path)
+        # По словарям folders_for_copy и files_for_copy
+        # составляем текст с описанием того что будет копировано.
         new_text = ""
         if folders_for_copy:
             new_text += "ПАПКИ, КОТОРЫЕ БУДУТ КОПИРОВАНЫ:\n"
@@ -69,15 +81,19 @@ class Gui:
                 new_text += f"{k}\n"
                 for directory in v:
                     new_text += f"путь: {directory}\n"
+        # Этот текст демонстрируем пользователю.
         self._text_warning.configure(
             text=new_text,
         )
+        # Записываем словари в атрибуты класса.
         self.folders_for_copy = folders_for_copy
         self.files_for_copy = files_for_copy
 
 
     def _calculate(self):
-        new_text = ""
+        new_text = ""  # Текст описывающий результат копирования.
+        # Если есть папки/файлы для копирования,
+        # выводим список папок/файлов и список путей в которые копируем.
         if self.folders_for_copy:
             new_text += "ПАПКИ, результат копирования:\n"
         for folder_name, targets in self.folders_for_copy.items():
@@ -107,6 +123,7 @@ class Gui:
                     new_text += f"{target} - успешно.\n"
                 except:
                     new_text += f"{target} - НЕУДАЧНО.\n"
+        # Получившийся текст не должен быть пустым.
         if new_text:
             self._text_warning.configure(
                 text=new_text,
@@ -124,7 +141,7 @@ class Gui:
         # Оформление окна
         self._window = Tk()
         self._window.title(self.title_text)
-        self._window.geometry("960x600")
+        self._window.geometry("960x600")  # высота подобрана под частный случай.
         # Ширина для кнопок
         width = 20
 

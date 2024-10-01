@@ -2,6 +2,7 @@ import os
 
 
 def list_dir(relative_path):
+    # Просто функция из os, но поднимающая ошибку с моим описанием.
     try:
         filenames = os.listdir(relative_path)
     except Exception:
@@ -12,36 +13,38 @@ def list_dir(relative_path):
 
 
 def get_list_of_folders_names(relative_path):
-    # get all files' and folders' names in the current directory
+    # получаем лист файлов и папок из директории
     filenames = list_dir(relative_path)
 
     result = []
-    for filename in filenames:  # loop through all the files and folders
+    for filename in filenames:
+        # Получаем путь к файлу/папке
         path = os.path.join(
             os.path.abspath(relative_path), filename
         )
+        # Проверяем ведет ли путь к папке, если да - добавляем.
         if os.path.isdir(os.path.join(
                 relative_path, filename
-        )):  # check whether the current object is a folder or not
+        )):
             result.append(filename)
-
     result.sort()
     return result
 
 
 def get_list_of_files_names(relative_path):
-    # get all files' and folders' names in the current directory
+    # получаем лист файлов и папок из директории
     filenames = list_dir(relative_path)
 
     result = []
-    for filename in filenames:  # loop through all the files and folders
+    for filename in filenames:
+        # Получаем путь к файлу/папке
         path = os.path.join(
             os.path.abspath(relative_path), filename
         )
+        # Проверяем ведет ли путь к папке, если нет - добавляем.
         if not os.path.isdir(os.path.join(
                 relative_path, filename
-        )):  # check whether the current object is a folder or not
+        )):
             result.append(filename)
-
     result.sort()
     return result
