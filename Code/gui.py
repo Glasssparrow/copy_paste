@@ -108,9 +108,13 @@ class Gui:
             )
             for target in targets:
                 try:
-                    copy_folder(source, target)
-                    new_text += f"{target} - успешно.\n"
-                except:
+                    target_directory = os.path.dirname(target)
+                    if os.path.isdir(target_directory):
+                        copy_folder(source, target)
+                        new_text += f"{target} - успешно.\n"
+                    else:
+                        raise Exception(f"Папка {target_directory} не найдена.")
+                except Exception:
                     new_text += f"{target} - НЕУДАЧНО.\n"
                     raise
         if self.files_for_copy:
