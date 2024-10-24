@@ -116,7 +116,6 @@ class Order:
         # normpath - нормализует путь (убирает / в конце если он есть).
         # / может сломать basename.
         # basename возвращает последнюю часть пути.
-        print(directory)
         last_folder = os.path.basename(os.path.normpath(
             directory,
             ))
