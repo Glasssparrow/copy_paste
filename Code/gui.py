@@ -1,6 +1,5 @@
 from tkinter import filedialog as fd
-from tkinter import Button, Tk, Label, Checkbutton, BooleanVar
-from datetime import datetime
+from tkinter import Button, Tk, Label
 import os
 from Code.get_list_of_folders_or_files import (
     get_list_of_folders_names,
