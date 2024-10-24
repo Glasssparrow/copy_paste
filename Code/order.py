@@ -83,7 +83,7 @@ class Order:
             # возвращаем True.
             if not self.firsts_parts or first_part_of_name_fit:
                 if not self.last_parts or last_part_of_name_fit:
-                    if not self.extensions or extension_fit:
+                    if not self.extensions or extension_fit or is_folder:
                         return True
         else:
             if name_with_extension in self.full_names:
