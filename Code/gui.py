@@ -16,7 +16,6 @@ class Gui:
 
     title_text = "Копипастер 1.0"
 
-
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
         """
@@ -89,7 +88,6 @@ class Gui:
         self.folders_for_copy = folders_for_copy
         self.files_for_copy = files_for_copy
 
-
     def _calculate(self):
         new_text = ""  # Текст описывающий результат копирования.
         # Если есть папки/файлы для копирования,
@@ -133,7 +131,6 @@ class Gui:
                 text="Что-то пошло не так. =\\",
             )
 
-
     def __init__(self, orders, initial_directory):
         # Исходная папка
         self.initial_directory = initial_directory
@@ -144,7 +141,6 @@ class Gui:
         self._window.geometry("960x600")  # высота подобрана под частный случай.
         # Ширина для кнопок
         width = 20
-
 
         # Кнопка выбора папки
         self._folder_selection_button = Button(
@@ -178,7 +174,6 @@ class Gui:
             )
         self._calculate_button.grid(columnspan=6, column=0,
                                     row=3)
-
 
         # Текст ошибки
         self._text_warning = (
