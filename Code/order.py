@@ -116,7 +116,7 @@ class Order:
         # normpath - нормализует путь (убирает / в конце если он есть).
         # / может сломать basename.
         # basename возвращает последнюю часть пути.
-        last_folder = os.path.basename(os.path.normpath(
+        source_folder = os.path.basename(os.path.normpath(
             directory,
             ))
         paths = []
@@ -126,7 +126,7 @@ class Order:
                 # Если подпапок нет
                 path = self.create_path(
                     main_directory=main_directory,
-                    last_folder=last_folder,
+                    last_folder=source_folder,
                     additional_directory="",
                     file_name=name_of_file_or_folder,
                 )
@@ -135,7 +135,7 @@ class Order:
             for additional_directory in self.folders_options:
                 path = self.create_path(
                     main_directory=main_directory,
-                    last_folder=last_folder,
+                    last_folder=source_folder,
                     additional_directory=additional_directory,
                     file_name=name_of_file_or_folder,
                 )
