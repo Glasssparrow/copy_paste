@@ -31,8 +31,8 @@ class Gui:
         # Получаем список папок в папке с исходными данными.
         folders = get_list_of_folders_names(self.initial_directory)
         # переменные в которые записываем результат.
-        folders_for_copy = {}
-        files_for_copy = {}
+        self.folders_for_copy = {}
+        self.files_for_copy = {}
         for folder in folders:
             for order in self.orders:
                 # Проверяем каждое правило копирования.
@@ -47,12 +47,12 @@ class Gui:
                         name_of_file_or_folder=folder,
                     )
                     # Создаем элемент в словаре если его нет.
-                    folders_for_copy[folder] = folders_for_copy.get(
+                    self.folders_for_copy[folder] = self.folders_for_copy.get(
                         folder, []
                     )
                     # Добавляем пути в элемент словаря (лист)
                     for path in paths:
-                        folders_for_copy[folder].append(path)
+                        self.folders_for_copy[folder].append(path)
 
         # Получаем список файлов в папке с исходными данными.
         files = get_list_of_files_names(self.initial_directory)
@@ -70,22 +70,22 @@ class Gui:
                         name_of_file_or_folder=file,
                         )
                     # Создаем элемент в словаре если его нет.
-                    files_for_copy[file] = files_for_copy.get(file, [])
+                    self.files_for_copy[file] = self.files_for_copy.get(file, [])
                     # Добавляем пути в элемент словаря (лист)
                     for path in paths:
-                        files_for_copy[file].append(path)
+                        self.files_for_copy[file].append(path)
         # По словарям folders_for_copy и files_for_copy
         # составляем текст с описанием того что будет копировано.
         new_text = ""
-        if folders_for_copy:
+        if self.folders_for_copy:
             new_text += "ПАПКИ, КОТОРЫЕ БУДУТ КОПИРОВАНЫ:\n"
-            for k, v in folders_for_copy.items():
+            for k, v in self.folders_for_copy.items():
                 new_text += f"{k}\n"
                 for directory in v:
                     new_text += f"путь: {directory}\n"
-        if files_for_copy:
+        if self.files_for_copy:
             new_text += "ФАЙЛЫ, КОТОРЫЕ БУДУТ КОПИРОВАНЫ:\n"
-            for k, v in files_for_copy.items():
+            for k, v in self.files_for_copy.items():
                 new_text += f"{k}\n"
                 for directory in v:
                     new_text += f"путь: {directory}\n"
@@ -93,9 +93,6 @@ class Gui:
         self._text_warning.configure(
             text=new_text,
         )
-        # Записываем словари в атрибуты класса.
-        self.folders_for_copy = folders_for_copy
-        self.files_for_copy = files_for_copy
 
     def _copy_files(self):
         new_text = ""  # Текст описывающий результат копирования.
