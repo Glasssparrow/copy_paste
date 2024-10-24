@@ -94,13 +94,14 @@ class Order:
 
     def get_paths(
             self,
-            directory,
-            name_of_file_or_folder,
-            file_name,
+            directory: str,  # Папка из которой копируем.
+            is_folder_and_not_a_file: bool,
+            name_of_file_or_folder: str,
             ):
         # normpath - нормализует путь (убирает / в конце если он есть).
         # / может сломать basename.
         # basename возвращает последнюю часть пути.
+        print(directory)
         last_folder = os.path.basename(os.path.normpath(
             directory,
             ))
@@ -113,7 +114,7 @@ class Order:
                     main_directory=main_directory,
                     last_folder=last_folder,
                     additional_directory="",
-                    file_name=file_name,
+                    file_name=name_of_file_or_folder,
                 )
                 paths.append(path)
             # Каждой подпапке по пути.
@@ -122,7 +123,7 @@ class Order:
                     main_directory=main_directory,
                     last_folder=last_folder,
                     additional_directory=additional_directory,
-                    file_name=file_name,
+                    file_name=name_of_file_or_folder,
                 )
                 paths.append(path)
         return paths

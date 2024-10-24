@@ -40,12 +40,18 @@ class Gui:
                 if order.should_be_copied(folder):
                     # Если нужно копировать добавляем пути в список
                     # на копирование для этой папки.
+
+                    # Возвращает лист путей в которые копировать.
                     paths = order.get_paths(
                         directory=self.initial_directory,
+                        is_folder_and_not_a_file=True,
                         name_of_file_or_folder=folder,
-                        file_name=folder,
-                        )  # метод возвращает лист путей в которые копировать.
-                    folders_for_copy[folder] = folders_for_copy.get(folder, [])
+                    )
+                    # Создаем элемент в словаре если его нет.
+                    folders_for_copy[folder] = folders_for_copy.get(
+                        folder, []
+                    )
+                    # Добавляем пути в элемент словаря (лист)
                     for path in paths:
                         folders_for_copy[folder].append(path)
 
@@ -57,12 +63,16 @@ class Gui:
                 if order.should_be_copied(file):
                     # Если нужно копировать добавляем пути в список
                     # на копирование для этой папки.
+
+                    # Возвращает лист путей в которые копировать.
                     paths = order.get_paths(
                         directory=self.initial_directory,
+                        is_folder_and_not_a_file=False,
                         name_of_file_or_folder=file,
-                        file_name=file,
-                        )  # метод возвращает лист путей в которые копировать.
+                        )
+                    # Создаем элемент в словаре если его нет.
                     files_for_copy[file] = files_for_copy.get(file, [])
+                    # Добавляем пути в элемент словаря (лист)
                     for path in paths:
                         files_for_copy[file].append(path)
         # По словарям folders_for_copy и files_for_copy
@@ -88,7 +98,7 @@ class Gui:
         self.folders_for_copy = folders_for_copy
         self.files_for_copy = files_for_copy
 
-    def _calculate(self):
+    def _copy_files(self):
         new_text = ""  # Текст описывающий результат копирования.
         # Если есть папки/файлы для копирования,
         # выводим список папок/файлов и список путей в которые копируем.
@@ -169,7 +179,7 @@ class Gui:
         self._calculate_button = Button(
             self._window, text="Ctr+C, Ctr+V",
             width=width * 6 + 12,
-            command=self._calculate,
+            command=self._copy_files,
             bg="green",
             )
         self._calculate_button.grid(columnspan=6, column=0,
