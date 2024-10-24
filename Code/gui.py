@@ -1,6 +1,5 @@
 from tkinter import filedialog as fd
-from tkinter import Button, Tk, Label, Checkbutton, BooleanVar
-from datetime import datetime
+from tkinter import Button, Tk, Label
 import os
 from Code.get_list_of_folders_or_files import (
     get_list_of_folders_names,
@@ -15,7 +14,6 @@ from Code.copy_folder_or_file import (
 class Gui:
 
     title_text = "Копипастер 1.0"
-
 
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
@@ -33,51 +31,61 @@ class Gui:
         # Получаем список папок в папке с исходными данными.
         folders = get_list_of_folders_names(self.initial_directory)
         # переменные в которые записываем результат.
-        folders_for_copy = {}
-        files_for_copy = {}
+        self.folders_for_copy = {}
+        self.files_for_copy = {}
         for folder in folders:
             for order in self.orders:
                 # Проверяем каждое правило копирования.
-                if order.should_be_copied(folder):
+                if order.should_be_copied(folder, is_folder=True):
                     # Если нужно копировать добавляем пути в список
                     # на копирование для этой папки.
+
+                    # Возвращает лист путей в которые копировать.
                     paths = order.get_paths(
                         directory=self.initial_directory,
+                        is_folder_and_not_a_file=True,
                         name_of_file_or_folder=folder,
-                        file_name=folder,
-                        )  # метод возвращает лист путей в которые копировать.
-                    folders_for_copy[folder] = folders_for_copy.get(folder, [])
+                    )
+                    # Создаем элемент в словаре если его нет.
+                    self.folders_for_copy[folder] = self.folders_for_copy.get(
+                        folder, []
+                    )
+                    # Добавляем пути в элемент словаря (лист)
                     for path in paths:
-                        folders_for_copy[folder].append(path)
+                        self.folders_for_copy[folder].append(path)
 
         # Получаем список файлов в папке с исходными данными.
         files = get_list_of_files_names(self.initial_directory)
         for file in files:
             for order in self.orders:
                 # Проверяем каждое правило копирования.
-                if order.should_be_copied(file):
+                if order.should_be_copied(file, is_folder=True):
                     # Если нужно копировать добавляем пути в список
                     # на копирование для этой папки.
+
+                    # Возвращает лист путей в которые копировать.
                     paths = order.get_paths(
                         directory=self.initial_directory,
+                        is_folder_and_not_a_file=False,
                         name_of_file_or_folder=file,
-                        file_name=file,
-                        )  # метод возвращает лист путей в которые копировать.
-                    files_for_copy[file] = files_for_copy.get(file, [])
+                        )
+                    # Создаем элемент в словаре если его нет.
+                    self.files_for_copy[file] = self.files_for_copy.get(file, [])
+                    # Добавляем пути в элемент словаря (лист)
                     for path in paths:
-                        files_for_copy[file].append(path)
+                        self.files_for_copy[file].append(path)
         # По словарям folders_for_copy и files_for_copy
         # составляем текст с описанием того что будет копировано.
         new_text = ""
-        if folders_for_copy:
+        if self.folders_for_copy:
             new_text += "ПАПКИ, КОТОРЫЕ БУДУТ КОПИРОВАНЫ:\n"
-            for k, v in folders_for_copy.items():
+            for k, v in self.folders_for_copy.items():
                 new_text += f"{k}\n"
                 for directory in v:
                     new_text += f"путь: {directory}\n"
-        if files_for_copy:
+        if self.files_for_copy:
             new_text += "ФАЙЛЫ, КОТОРЫЕ БУДУТ КОПИРОВАНЫ:\n"
-            for k, v in files_for_copy.items():
+            for k, v in self.files_for_copy.items():
                 new_text += f"{k}\n"
                 for directory in v:
                     new_text += f"путь: {directory}\n"
@@ -85,12 +93,8 @@ class Gui:
         self._text_warning.configure(
             text=new_text,
         )
-        # Записываем словари в атрибуты класса.
-        self.folders_for_copy = folders_for_copy
-        self.files_for_copy = files_for_copy
 
-
-    def _calculate(self):
+    def _copy_files(self):
         new_text = ""  # Текст описывающий результат копирования.
         # Если есть папки/файлы для копирования,
         # выводим список папок/файлов и список путей в которые копируем.
@@ -104,9 +108,13 @@ class Gui:
             )
             for target in targets:
                 try:
-                    copy_folder(source, target)
-                    new_text += f"{target} - успешно.\n"
-                except:
+                    target_directory = os.path.dirname(target)
+                    if os.path.isdir(target_directory):
+                        copy_folder(source, target)
+                        new_text += f"{target} - успешно.\n"
+                    else:
+                        raise Exception(f"Папка {target_directory} не найдена.")
+                except Exception:
                     new_text += f"{target} - НЕУДАЧНО.\n"
                     raise
         if self.files_for_copy:
@@ -133,7 +141,6 @@ class Gui:
                 text="Что-то пошло не так. =\\",
             )
 
-
     def __init__(self, orders, initial_directory):
         # Исходная папка
         self.initial_directory = initial_directory
@@ -144,7 +151,6 @@ class Gui:
         self._window.geometry("960x600")  # высота подобрана под частный случай.
         # Ширина для кнопок
         width = 20
-
 
         # Кнопка выбора папки
         self._folder_selection_button = Button(
@@ -173,12 +179,11 @@ class Gui:
         self._calculate_button = Button(
             self._window, text="Ctr+C, Ctr+V",
             width=width * 6 + 12,
-            command=self._calculate,
+            command=self._copy_files,
             bg="green",
             )
         self._calculate_button.grid(columnspan=6, column=0,
                                     row=3)
-
 
         # Текст ошибки
         self._text_warning = (
