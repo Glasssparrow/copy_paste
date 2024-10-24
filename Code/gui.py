@@ -113,10 +113,9 @@ class Gui:
                         copy_folder(source, target)
                         new_text += f"{target} - успешно.\n"
                     else:
-                        raise Exception(f"Папка {target_directory} не найдена.")
-                except Exception:
+                        new_text += f"{target} - НЕУДАЧНО.\n"
+                except:
                     new_text += f"{target} - НЕУДАЧНО.\n"
-                    raise
         if self.files_for_copy:
             new_text += "ФАЙЛЫ, результат копирования:\n"
         for file_name, targets in self.files_for_copy.items():
