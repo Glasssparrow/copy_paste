@@ -38,40 +38,55 @@ class Order:
         # Для случая, когда self.only_full_names == True
         self.full_names = None  # Полные имена файлов
 
-    def should_be_copied(self, name_with_extension, full_path=False):
+    def should_be_copied(self, name_with_extension, is_folder: bool, full_path=False):
+        if is_folder and not self.can_copy_folders:
+            return False
         # Если получили полный путь, то отделяем имя.
         if full_path:
             name_with_extension = os.path.basename(
                 name_with_extension)
-        # Если ограничений совсем нет, то что-то не так.
-        if (
-            not self.last_parts and
-            not self.extensions
-        ):
-            raise Exception(
-                f"Не найдены правила для {self.name}"
-            )
-        # Проверяем проходит ли расширение
-        extension_fit = False
-        for extension in self.extensions:
-            # Расширение должно совпадать с 
-            # правилом на копирование.
-            file_extension = os.path.splitext(name_with_extension)[1]
-            if file_extension == extension:
-                extension_fit = True
-        # Проверяем проходит ли имя
-        name_fit = False
-        for name_requirement in self.last_parts:
-            # Окончание имени должно совпадать с 
-            # правилом на копирование.
-            file_name = os.path.splitext(name_with_extension)[0]
-            if file_name[-len(name_requirement):] == name_requirement:
-                name_fit = True
+        if not self.only_full_names:
+            # Если ограничений совсем нет, то что-то не так.
+            if (
+                not self.firsts_parts and
+                not self.last_parts and
+                not self.extensions
+            ):
+                raise Exception(
+                    f"Не найдены правила для {self.name}"
+                )
+            # Проверяем проходит ли расширение
+            extension_fit = False
+            for extension in self.extensions:
+                # Расширение должно совпадать с
+                # правилом на копирование.
+                file_extension = os.path.splitext(name_with_extension)[1]
+                if file_extension == extension:
+                    extension_fit = True
+            # Проверяем проходит ли имя
+            last_part_of_name_fit = False
+            for name_requirement in self.last_parts:
+                # Окончание имени должно совпадать с
+                # правилом на копирование.
+                file_name = os.path.splitext(name_with_extension)[0]
+                if file_name[-len(name_requirement):] == name_requirement:
+                    last_part_of_name_fit = True
+            first_part_of_name_fit = False
+            for name_requirement in self.firsts_parts:
+                # Начало имени должно совпадать с
+                # правилом на копирование.
+                file_name = os.path.splitext(name_with_extension)[0]
+                if file_name[:len(name_requirement)] == name_requirement:
+                    first_part_of_name_fit = True
 
-        # Если оба условия выполняются или отсутствуют, то
-        # возвращаем True.
-        if not self.last_parts or name_fit:
-            if not self.extensions or extension_fit:
+            # Если все три условия выполняются или отсутствуют, то
+            # возвращаем True.
+            if not self.firsts_parts or first_part_of_name_fit:
+                if not self.last_parts or last_part_of_name_fit:
+                    if not self.extensions or extension_fit:
+                        return True
+        else:
+            if name_with_extension in self.full_names:
                 return True
         return False
 

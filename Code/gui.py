@@ -36,7 +36,7 @@ class Gui:
         for folder in folders:
             for order in self.orders:
                 # Проверяем каждое правило копирования.
-                if order.should_be_copied(folder):
+                if order.should_be_copied(folder, is_folder=True):
                     # Если нужно копировать добавляем пути в список
                     # на копирование для этой папки.
 
@@ -59,7 +59,7 @@ class Gui:
         for file in files:
             for order in self.orders:
                 # Проверяем каждое правило копирования.
-                if order.should_be_copied(file):
+                if order.should_be_copied(file, is_folder=True):
                     # Если нужно копировать добавляем пути в список
                     # на копирование для этой папки.
 
