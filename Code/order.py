@@ -17,11 +17,11 @@ import os
 class Order:
 
     def __init__(self, name):
-        self.name = name
-        self.target = None
-        self.names = None
-        self.extensions = None
-        self.target_folder = None
+        self.name = name  # Имя правила
+        self.target = None  # Пути к папкам проектов
+        self.names = None  # Окончания имен
+        self.extensions = None  # Расширения
+        self.target_folder = None  # Папки в папках проекта.
 
     def should_be_copied(self, name_with_extension, full_path=False):
         # Если получили полный путь, то отделяем имя.
@@ -60,7 +60,6 @@ class Order:
                 return True
         return False
 
-
     @staticmethod
     def create_path(
         main_directory,
@@ -83,7 +82,7 @@ class Order:
             directory,
             name_of_file_or_folder,
             file_name,
-        ):
+            ):
         # normpath - нормализует путь (убирает / в конце если он есть).
         # / может сломать basename.
         # basename возвращает последнюю часть пути.
