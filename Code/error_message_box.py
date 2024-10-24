@@ -16,7 +16,6 @@ class ErrorGui:
         for tuple_element in message_tuple:
             self.message_text += tuple_element
 
-
         # Сообщение об ошибке
         self._text_path = Label(text=self.message_text)
         self._text_path.grid(column=0, row=0)
