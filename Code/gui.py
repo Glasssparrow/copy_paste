@@ -1,5 +1,6 @@
+import tkinter as tk
 from tkinter import filedialog as fd
-from tkinter import Button, Tk, Label
+from tkinter import Button, Tk, Label, Frame, StringVar, Entry, Scrollbar
 import os
 from Code.get_list_of_folders_or_files import (
     get_list_of_folders_names,
@@ -146,9 +147,9 @@ class Gui:
         # Оформление окна
         self._window = Tk()
         self._window.title(self.title_text)
-        self._window.geometry("960x600")  # высота подобрана под частный случай.
+        self._window.geometry("1450x600")  # высота подобрана под частный случай.
         # Ширина для кнопок
-        width = 20
+        width = 30
 
         # Кнопка выбора папки
         self._folder_selection_button = Button(
@@ -184,10 +185,37 @@ class Gui:
                                     row=3)
 
         # Текст ошибки
-        self._text_warning = (
-            Label(text="Копирование еще не выполнялось"))
-        self._text_warning.grid(columnspan=6,
-                                column=0, row=5)
+
+        root = self._window
+        def on_configure(event):
+            # update scrollregion after starting 'mainloop'
+            # when all widgets are in canvas
+            canvas.configure(scrollregion=canvas.bbox('all'))
+    
+        # --- create canvas with scrollbar ---
+
+        canvas = tk.Canvas(root, width=1200, height=500)
+        canvas.grid()
+
+        scrollbar = tk.Scrollbar(root, command=canvas.yview)
+        scrollbar.grid(column=6, row=4, rowspan=2)
+
+        canvas.configure(yscrollcommand = scrollbar.set)
+
+        # update scrollregion after starting 'mainloop'
+        # when all widgets are in canvas
+        canvas.bind('<Configure>', on_configure)
+
+        # --- put frame in canvas ---
+
+        self.frame = tk.Frame(canvas)
+        canvas.create_window((0,0), window=self.frame, anchor='nw')
+
+        # --- add widgets in frame ---
+
+        self._text_warning = tk.Label(self.frame, text=" "*190+"Копирование не выполнялось"+"\n"*100,
+                                      justify="left")
+        self._text_warning.grid(columnspan=6, column=0, row=4, rowspan=2)
 
         # Запускаем окно
         self._window.mainloop()
