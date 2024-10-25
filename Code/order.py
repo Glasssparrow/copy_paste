@@ -50,7 +50,7 @@ class Order:
             if (
                 not self.firsts_parts and
                 not self.last_parts and
-                not self.extensions
+                (not self.extensions and not self.can_copy_folders)
             ):
                 raise Exception(
                     f"Не найдены правила для {self.name}"
@@ -68,14 +68,20 @@ class Order:
             for name_requirement in self.last_parts:
                 # Окончание имени должно совпадать с
                 # правилом на копирование.
-                file_name = os.path.splitext(name_with_extension)[0]
+                if not is_folder:
+                    file_name = os.path.splitext(name_with_extension)[0]
+                else:
+                    file_name = name_with_extension
                 if file_name[-len(name_requirement):] == name_requirement:
                     last_part_of_name_fit = True
             first_part_of_name_fit = False
             for name_requirement in self.firsts_parts:
                 # Начало имени должно совпадать с
                 # правилом на копирование.
-                file_name = os.path.splitext(name_with_extension)[0]
+                if not is_folder:
+                    file_name = os.path.splitext(name_with_extension)[0]
+                else:
+                    file_name = name_with_extension
                 if file_name[:len(name_requirement)] == name_requirement:
                     first_part_of_name_fit = True
 
