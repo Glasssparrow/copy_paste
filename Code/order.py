@@ -226,7 +226,7 @@ def get_orders(relative_path):
             for n, line in enumerate(text_list):
                 if line == CAN_COPY_FOLDERS:
                     number = n
-            if number:
+            if number is not None:
                 text_list.pop(number)
                 order.can_copy_folders = True
 
