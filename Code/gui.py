@@ -13,7 +13,7 @@ from Code.copy_folder_or_file import (
 
 class Gui:
 
-    title_text = "Копипастер 1.0"
+    title_text = "Копипастер 2.0"
 
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
