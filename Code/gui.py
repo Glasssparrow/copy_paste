@@ -53,7 +53,6 @@ class Gui:
                     # Добавляем пути в элемент словаря (лист)
                     for path in paths:
                         self.folders_for_copy[folder].append(path)
-
         # Получаем список файлов в папке с исходными данными.
         files = get_list_of_files_names(self.initial_directory)
         for file in files:
