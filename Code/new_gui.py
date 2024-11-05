@@ -10,10 +10,11 @@ class Gui:
 
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
-        """
-        Функция выбора папки в которой хранятся исходные файлы для копирования.
-        """
-        pass
+        self._text_warning.destroy()
+        self._text_warning = tk.Listbox(width=200, height=10,)
+        for x in range(100):
+            self._text_warning.insert(0, "Копирование не выполнялось"+str(x))
+        self._text_warning.grid(columnspan=6, column=0, row=4)
 
     def _copy_files(self):
         pass
@@ -64,7 +65,7 @@ class Gui:
 
         # Текст ошибки
 
-        self._text_warning = tk.Listbox(width=200)
+        self._text_warning = tk.Listbox(width=200, height=20,)
         for x in range(100):
             self._text_warning.insert(0, "Копирование не выполнялось"+str(x))
         self._text_warning.grid(columnspan=6, column=0, row=4)
