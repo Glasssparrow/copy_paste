@@ -9,6 +9,8 @@ from Code.order import get_orders
 from Code.error_message_box import ErrorGui
 from Code.gui import Gui
 
+# TODO
+# псевдонимы для целевых папок
 
 try:
     # Читаем инструкции: какие файлы куда копировать.
