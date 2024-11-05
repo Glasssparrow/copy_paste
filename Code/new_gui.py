@@ -64,8 +64,9 @@ class Gui:
 
         # Текст ошибки
 
-        self._text_warning = tk.Label(text="Копирование не выполнялось")
-        self._text_warning.grid(columnspan=6, column=0, row=4, rowspan=2)
+        self._text_warning = tk.Listbox()
+        self._text_warning.insert(0, "Копирование не выполнялось")
+        self._text_warning.grid(columnspan=6, column=0, row=4)
 
         # Запускаем окно
         self._window.mainloop()
