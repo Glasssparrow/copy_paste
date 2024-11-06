@@ -43,7 +43,7 @@ class Gui:
 
         # Текст названия выбранной папки
         self._text_path = (
-            Label(text="Название папки"))
+            Label(text="Папка проекта"))
         self._text_path.grid(columnspan=6,
                              column=0, row=1)
 
