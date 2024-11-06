@@ -17,7 +17,9 @@ class Gui:
         self._text_warning.grid(columnspan=6, column=0, row=5)
 
     def _copy_files(self):
-        pass
+        self._text_warning.destroy()
+        self._text_warning = tk.Label(text=str(self.radionbutton_position.get()))
+        self._text_warning.grid(columnspan=6, column=0, row=5)
 
     def __init__(self):
         # Исходная папка
@@ -55,10 +57,10 @@ class Gui:
 
         # Выбор формата вывода информации
         self.radionbutton_position = tk.IntVar()
-        self._radiobutton0 = tk.Radiobutton(text="text", variable=self.radionbutton_position, value=0)
-        self._radiobutton1 = tk.Radiobutton(variable=self.radionbutton_position, value=1)
-        self._radiobutton2 = tk.Radiobutton(variable=self.radionbutton_position, value=2)
-        self._radiobutton3 = tk.Radiobutton(variable=self.radionbutton_position, value=3)
+        self._radiobutton0 = tk.Radiobutton(text="text", variable=self.radionbutton_position, value=0, command=self._copy_files)
+        self._radiobutton1 = tk.Radiobutton(variable=self.radionbutton_position, value=1, command=self._copy_files)
+        self._radiobutton2 = tk.Radiobutton(variable=self.radionbutton_position, value=2, command=self._copy_files)
+        self._radiobutton3 = tk.Radiobutton(variable=self.radionbutton_position, value=3, command=self._copy_files)
         self._radiobutton0.grid(column=0, row=3)
         self._radiobutton1.grid(column=1, row=3)
         self._radiobutton2.grid(column=2, row=3)
