@@ -56,7 +56,7 @@ class Gui:
                                column=0, row=2)
 
         # Выбор формата вывода информации
-        self.radionbutton_position = tk.IntVar()
+        self.radionbutton_position = tk.IntVar(value=2)
         self._radiobutton0 = tk.Radiobutton(text="text", variable=self.radionbutton_position, value=0, command=self._copy_files)
         self._radiobutton1 = tk.Radiobutton(variable=self.radionbutton_position, value=1, command=self._copy_files)
         self._radiobutton2 = tk.Radiobutton(variable=self.radionbutton_position, value=2, command=self._copy_files)
