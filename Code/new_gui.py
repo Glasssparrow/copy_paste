@@ -14,7 +14,7 @@ class Gui:
         self._text_warning = tk.Listbox(width=200, height=10,)
         for x in range(100):
             self._text_warning.insert(0, "Копирование не выполнялось"+str(x))
-        self._text_warning.grid(columnspan=6, column=0, row=4)
+        self._text_warning.grid(columnspan=6, column=0, row=5)
 
     def _copy_files(self):
         pass
@@ -54,8 +54,14 @@ class Gui:
                                column=0, row=2)
 
         # Выбор формата вывода информации
-        self._radiobutton = tk.Radiobutton()
-        self._radiobutton.grid(column=0, row=3)
+        self._radiobutton0 = tk.Radiobutton(text="text")
+        self._radiobutton1 = tk.Radiobutton()
+        self._radiobutton2 = tk.Radiobutton()
+        self._radiobutton3 = tk.Radiobutton()
+        self._radiobutton0.grid(column=0, row=3)
+        self._radiobutton1.grid(column=1, row=3)
+        self._radiobutton2.grid(column=2, row=3)
+        self._radiobutton3.grid(column=3, row=3)
 
         # Кнопка расчета
         self._calculate_button = Button(
