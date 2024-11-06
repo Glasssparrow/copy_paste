@@ -54,10 +54,11 @@ class Gui:
                                column=0, row=2)
 
         # Выбор формата вывода информации
-        self._radiobutton0 = tk.Radiobutton(text="text")
-        self._radiobutton1 = tk.Radiobutton()
-        self._radiobutton2 = tk.Radiobutton()
-        self._radiobutton3 = tk.Radiobutton()
+        self.radionbutton_position = tk.IntVar()
+        self._radiobutton0 = tk.Radiobutton(text="text", variable=self.radionbutton_position, value=0)
+        self._radiobutton1 = tk.Radiobutton(variable=self.radionbutton_position, value=1)
+        self._radiobutton2 = tk.Radiobutton(variable=self.radionbutton_position, value=2)
+        self._radiobutton3 = tk.Radiobutton(variable=self.radionbutton_position, value=3)
         self._radiobutton0.grid(column=0, row=3)
         self._radiobutton1.grid(column=1, row=3)
         self._radiobutton2.grid(column=2, row=3)
