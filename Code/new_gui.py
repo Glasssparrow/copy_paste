@@ -53,6 +53,10 @@ class Gui:
         self._text_folder.grid(columnspan=6,
                                column=0, row=2)
 
+        # Выбор формата вывода информации
+        self._radiobutton = tk.Radiobutton()
+        self._radiobutton.grid(column=0, row=3)
+
         # Кнопка расчета
         self._calculate_button = Button(
             self._window, text="Ctr+C, Ctr+V",
@@ -61,14 +65,14 @@ class Gui:
             bg="green",
             )
         self._calculate_button.grid(columnspan=6, column=0,
-                                    row=3)
+                                    row=4)
 
         # Текст ошибки
 
         self._text_warning = tk.Listbox(width=200, height=20,)
         for x in range(100):
             self._text_warning.insert(0, "Копирование не выполнялось"+str(x))
-        self._text_warning.grid(columnspan=6, column=0, row=4)
+        self._text_warning.grid(columnspan=6, column=0, row=5)
 
         # Запускаем окно
         self._window.mainloop()
