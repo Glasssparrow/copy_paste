@@ -11,7 +11,7 @@ class Gui:
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
         self._text_warning.destroy()
-        self._text_warning = tk.Listbox(width=200, height=10,)
+        self._text_warning = tk.Listbox(width=220, height=10,)
         for x in range(100):
             self._text_warning.insert(0, "Копирование не выполнялось"+str(x))
         self._text_warning.grid(columnspan=6, column=0, row=5)
@@ -28,7 +28,7 @@ class Gui:
         # Оформление окна
         self._window = Tk()
         self._window.title(self.title_text)
-        self._window.geometry("1450x600")  # высота подобрана под частный случай.
+        self._window.geometry("1380x600")  # высота подобрана под частный случай.
         # Ширина для кнопок
         width = 30
 
@@ -61,7 +61,7 @@ class Gui:
             text="полная информация",
             variable=self.radionbutton_position, value=0, command=self._copy_files)
         self._radiobutton1 = tk.Radiobutton(
-            text="только целевые папки",
+            text="только полные пути копирования",
             variable=self.radionbutton_position, value=1, command=self._copy_files)
         self._radiobutton2 = tk.Radiobutton(
             text="целевые папки, выбранные подпапки (после копирования)",
@@ -90,7 +90,7 @@ class Gui:
 
         # Текст ошибки
 
-        self._text_warning = tk.Listbox(width=200, height=20,)
+        self._text_warning = tk.Listbox(width=220, height=20,)
         for x in range(100):
             self._text_warning.insert(0, "Копирование не выполнялось"+str(x))
         self._text_warning.grid(columnspan=6, column=0, row=5)
