@@ -22,25 +22,25 @@ class Common:
             element.set_status(status)
 
 
-class Order111:
+class Order111(Common):
 
     def __init__(self):
         pass
 
 
-class RulesForName:
+class RulesForName(Common):
 
     def __init__(self):
         pass
 
 
-class PathsForRule:
+class PathsForRule(Common):
 
     def __init__(self):
         pass
 
 
-class FolderForPaths:
+class FolderForPaths(Common):
 
     def __init__(self):
         pass
@@ -49,6 +49,6 @@ class FolderForPaths:
 class Folder:
 
     def __init__(self):
-        pass
+        self.status = "should be copied"
 
 
