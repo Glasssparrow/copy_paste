@@ -13,7 +13,8 @@
 class Common:
 
     def __init__(self):
-        pass
+        self.data = []
+        self.status = "should be copied"
 
 
 class Order111:
