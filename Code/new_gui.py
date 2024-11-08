@@ -8,17 +8,17 @@ class Gui:
 
     title_text = "Копипастер 3.0"
 
+    def _recreate_info_for_user(self):
+        self._text_warning.destroy()
+        self._text_warning = tk.Label(text=str(self.radionbutton_position.get()))
+        self._text_warning.grid(columnspan=6, column=0, row=5)
+
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
         self._text_warning.destroy()
         self._text_warning = tk.Listbox(width=220, height=29,)
         for x in range(100):
             self._text_warning.insert(0, "Копирование не выполнялось"+str(x))
-        self._text_warning.grid(columnspan=6, column=0, row=5)
-
-    def _recreate_info_for_user(self):
-        self._text_warning.destroy()
-        self._text_warning = tk.Label(text=str(self.radionbutton_position.get()))
         self._text_warning.grid(columnspan=6, column=0, row=5)
 
     def _copy_files(self):
