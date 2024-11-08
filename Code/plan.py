@@ -10,6 +10,12 @@
 # поступал приказ копировать (они были выделены), а на какие - нет.
 
 
+class Common:
+
+    def __init__(self):
+        pass
+
+
 class Order111:
 
     def __init__(self):
@@ -32,4 +38,11 @@ class FolderForPaths:
 
     def __init__(self):
         pass
+
+
+class Folder:
+
+    def __init__(self):
+        pass
+
 
