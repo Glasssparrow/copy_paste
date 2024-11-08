@@ -11,7 +11,7 @@ class Gui:
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
         self._text_warning.destroy()
-        self._text_warning = tk.Listbox(width=220, height=10,)
+        self._text_warning = tk.Listbox(width=220, height=29,)
         for x in range(100):
             self._text_warning.insert(0, "Копирование не выполнялось"+str(x))
         self._text_warning.grid(columnspan=6, column=0, row=5)
