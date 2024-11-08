@@ -8,3 +8,28 @@
 
 # Учесть что класс должен содержать информацию о том на какие папки
 # поступал приказ копировать (они были выделены), а на какие - нет.
+
+
+class Order:
+
+    def __init__(self):
+        pass
+
+
+class RulesForName:
+
+    def __init__(self):
+        pass
+
+
+class PathsForRule:
+
+    def __init__(self):
+        pass
+
+
+class FolderForPaths:
+
+    def __init__(self):
+        pass
+
