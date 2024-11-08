@@ -65,13 +65,13 @@ class Gui:
             text="полная информация",
             variable=self.radionbutton_position, value=0, command=self._recreate_info_for_user)
         self._radiobutton1 = tk.Radiobutton(
-            text="только полные пути копирования",
+            text="целевые папки, выбранные подпапки (после копирования)",
             variable=self.radionbutton_position, value=1, command=self._recreate_info_for_user)
         self._radiobutton2 = tk.Radiobutton(
-            text="целевые папки, выбранные подпапки (после копирования)",
+            text="псевдонимы, выбранные подпапки (после копирования)",
             variable=self.radionbutton_position, value=2, command=self._recreate_info_for_user)
         self._radiobutton3 = tk.Radiobutton(
-            text="псевдонимы, выбранные подпапки (после копирования)",
+            text="имена файлов и правила копирования",
             variable=self.radionbutton_position, value=3, command=self._recreate_info_for_user)
         self._radiobutton4 = tk.Radiobutton(
             text="только имена файлов",
