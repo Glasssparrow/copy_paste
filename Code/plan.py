@@ -16,6 +16,11 @@ class Common:
         self.data = []
         self.status = "should be copied"
 
+    def set_status(self, status):
+        self.status = status
+        for element in self.data:
+            element.set_status(status)
+
 
 class Order111:
 
