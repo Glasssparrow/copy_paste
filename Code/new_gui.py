@@ -67,7 +67,7 @@ class Gui:
             text="целевые папки, выбранные подпапки (после копирования)",
             variable=self.radionbutton_position, value=2, command=self._copy_files)
         self._radiobutton3 = tk.Radiobutton(
-            text="псевдонима, выбранные подпапки (после копирования)",
+            text="псевдонимы, выбранные подпапки (после копирования)",
             variable=self.radionbutton_position, value=3, command=self._copy_files)
         self._radiobutton4 = tk.Radiobutton(
             text="только имена файлов",
