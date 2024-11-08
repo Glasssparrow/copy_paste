@@ -61,18 +61,22 @@ class Gui:
             text="полная информация",
             variable=self.radionbutton_position, value=0, command=self._copy_files)
         self._radiobutton1 = tk.Radiobutton(
-            text="полная информация",
+            text="только целевые папки",
             variable=self.radionbutton_position, value=1, command=self._copy_files)
         self._radiobutton2 = tk.Radiobutton(
-            text="полная информация",
+            text="целевые папки, выбранные подпапки (после копирования)",
             variable=self.radionbutton_position, value=2, command=self._copy_files)
         self._radiobutton3 = tk.Radiobutton(
-            text="полная информация",
+            text="псевдонима, выбранные подпапки (после копирования)",
             variable=self.radionbutton_position, value=3, command=self._copy_files)
+        self._radiobutton4 = tk.Radiobutton(
+            text="только имена файлов",
+            variable=self.radionbutton_position, value=4, command=self._copy_files)
         self._radiobutton0.grid(column=0, row=3)
         self._radiobutton1.grid(column=1, row=3)
         self._radiobutton2.grid(column=2, row=3)
         self._radiobutton3.grid(column=3, row=3)
+        self._radiobutton4.grid(column=4, row=3)
 
         # Кнопка расчета
         self._calculate_button = Button(
