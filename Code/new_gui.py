@@ -25,7 +25,7 @@ class Gui:
     def _copy_files(self):
         pass
 
-    def __init__(self):
+    def __init__(self, rules, initial_directory):
         # Исходная папка
         self.initial_directory = "test"
         self.orders = None

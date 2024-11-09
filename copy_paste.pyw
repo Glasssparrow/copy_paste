@@ -7,14 +7,12 @@ from Code.CONSTANTS import (
 )
 from Code.rule import get_orders
 from Code.error_message_box import ErrorGui
-from Code.gui import Gui
+from Code.new_gui import Gui
 
-# TODO
-# псевдонимы для целевых папок
 
 try:
     # Читаем инструкции: какие файлы куда копировать.
-    orders = get_orders(FOLDER_WITH_ORDERS)
+    rules = get_orders(FOLDER_WITH_ORDERS)
     # Читаем стартовую директорию из которой будем начинать выбирать папку
     initial_dir = get_list_of_strings_from_file(
         FOLDER_WITH_ORDERS+"/"+INITIAL_DIR
@@ -24,4 +22,4 @@ except Exception as error:
     gui = ErrorGui(error.args)
 # Если всё в порядке, запускаем окно программы.
 else:
-    gui = Gui(orders=orders, initial_directory=initial_dir)
+    gui = Gui(rules=rules, initial_directory=initial_dir)
