@@ -10,16 +10,20 @@ class Gui:
 
     def _recreate_info_for_user(self):
         self._text_warning.destroy()
-        self._text_warning = tk.Label(text=str(self.radionbutton_position.get()))
+        self._text_warning = tk.Label(text=str(self.radiobutton_position.get()))
         self._text_warning.grid(columnspan=6, column=0, row=5)
 
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
         self._text_warning.destroy()
-        self._text_warning = tk.Listbox(width=220, height=29,
-                                        selectmode=tk.MULTIPLE,selectbackground="blue")
+        self._text_warning = tk.Listbox(
+            width=220, height=29,
+            selectmode=tk.MULTIPLE, selectbackground="blue"
+        )
         for x in range(100):
-            self._text_warning.insert(0, "Копирование не выполнялось"+str(x))
+            self._text_warning.insert(
+                0, "Копирование не выполнялось"+str(x)
+            )
         self._text_warning.grid(columnspan=6, column=0, row=5)
 
     def _copy_files(self):
@@ -60,22 +64,22 @@ class Gui:
                                column=0, row=2)
 
         # Выбор формата вывода информации
-        self.radionbutton_position = tk.IntVar(value=2)
+        self.radiobutton_position = tk.IntVar(value=2)
         self._radiobutton0 = tk.Radiobutton(
             text="полная информация",
-            variable=self.radionbutton_position, value=0, command=self._recreate_info_for_user)
+            variable=self.radiobutton_position, value=0, command=self._recreate_info_for_user)
         self._radiobutton1 = tk.Radiobutton(
             text="целевые папки, выбранные подпапки (после копирования)",
-            variable=self.radionbutton_position, value=1, command=self._recreate_info_for_user)
+            variable=self.radiobutton_position, value=1, command=self._recreate_info_for_user)
         self._radiobutton2 = tk.Radiobutton(
             text="псевдонимы, выбранные подпапки (после копирования)",
-            variable=self.radionbutton_position, value=2, command=self._recreate_info_for_user)
+            variable=self.radiobutton_position, value=2, command=self._recreate_info_for_user)
         self._radiobutton3 = tk.Radiobutton(
             text="имена файлов и правила копирования",
-            variable=self.radionbutton_position, value=3, command=self._recreate_info_for_user)
+            variable=self.radiobutton_position, value=3, command=self._recreate_info_for_user)
         self._radiobutton4 = tk.Radiobutton(
             text="только имена файлов",
-            variable=self.radionbutton_position, value=4, command=self._recreate_info_for_user)
+            variable=self.radiobutton_position, value=4, command=self._recreate_info_for_user)
         self._radiobutton0.grid(column=0, row=3)
         self._radiobutton1.grid(column=1, row=3)
         self._radiobutton2.grid(column=2, row=3)
@@ -99,4 +103,3 @@ class Gui:
 
         # Запускаем окно
         self._window.mainloop()
-
