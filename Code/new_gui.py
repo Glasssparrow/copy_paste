@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog as fd
-from tkinter import Button, Tk, Label, Frame, StringVar, Entry, Scrollbar
+from tkinter import Button, Tk, Label
 import os
 
 
