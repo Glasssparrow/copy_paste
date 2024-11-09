@@ -10,23 +10,19 @@ class Gui:
 
     def _recreate_info_for_user(self):
         self._text_warning.destroy()
-        self._text_warning = tk.Label(
-            text=str(self.radiobutton_position.get())
-        )
-        self._text_warning.grid(columnspan=6, column=0, row=5)
-
-    # Функция выбора пути к папке с исходными данными
-    def _choose_folder(self):
-        self._text_warning.destroy()
         self._text_warning = tk.Listbox(
             width=220, height=29,
             selectmode=tk.MULTIPLE, selectbackground="blue"
         )
         for x in range(100):
             self._text_warning.insert(
-                0, "Копирование не выполнялось"+str(x)
+                0, "Копирование не выполнялось" + str(x)
             )
         self._text_warning.grid(columnspan=6, column=0, row=5)
+
+    # Функция выбора пути к папке с исходными данными
+    def _choose_folder(self):
+        self._recreate_info_for_user()
 
     def _copy_files(self):
         pass
