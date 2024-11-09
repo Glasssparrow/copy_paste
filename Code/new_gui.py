@@ -10,7 +10,9 @@ class Gui:
 
     def _recreate_info_for_user(self):
         self._text_warning.destroy()
-        self._text_warning = tk.Label(text=str(self.radiobutton_position.get()))
+        self._text_warning = tk.Label(
+            text=str(self.radiobutton_position.get())
+        )
         self._text_warning.grid(columnspan=6, column=0, row=5)
 
     # Функция выбора пути к папке с исходными данными
