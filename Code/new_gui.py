@@ -100,5 +100,3 @@ class Gui:
         # Запускаем окно
         self._window.mainloop()
 
-
-gui = Gui()
