@@ -17,7 +17,7 @@ from Code.CONSTANTS import (
 import os
 
 
-class Order:
+class Rule:
 
     def __init__(self, name: str, only_full_names: bool):
         self.name = name  # Имя правила
@@ -178,15 +178,15 @@ def get_orders(relative_path):
                 FIRST_PARTS_OF_NAMES_STORAGE in files and
                 LAST_PARTS_OF_NAMES_STORAGE in files
         ):
-            order = Order(name=folder, only_full_names=False)
-            orders.append(order)
+            rule = Rule(name=folder, only_full_names=False)
+            orders.append(rule)
         elif (
                 TARGET_DIRECTORIES_STORAGE in files and
                 TARGET_FOLDER_STORAGE in files and
                 FULL_NAMES_STORAGE in files
         ):
-            order = Order(name=folder, only_full_names=True)
-            orders.append(order)
+            rule = Rule(name=folder, only_full_names=True)
+            orders.append(rule)
         else:
             # Если что-то не нашли в правиле - исключение.
             files_not_found = []
@@ -203,25 +203,25 @@ def get_orders(relative_path):
             raise Exception(
                 f"Не хватает файлов {files_not_found} в папке {folder}."
             )
-        # Записываем в order пути куда копировать.
+        # Записываем в rule пути куда копировать.
         target_directories_path = os.path.join(
             relative_path,
             folder,
             TARGET_DIRECTORIES_STORAGE,
         )
         text_list = get_list_of_strings_from_file(target_directories_path)
-        order.target = text_list
+        rule.target = text_list
         target_folder = os.path.join(
             relative_path,
             folder,
             TARGET_FOLDER_STORAGE,
         )
         text_list = get_list_of_strings_from_file(target_folder)
-        order.folders_options = text_list
+        rule.folders_options = text_list
 
         # Формируем правила для выбора файлов.
-        if not order.only_full_names:
-            # Записываем в order допустимые расширения.
+        if not rule.only_full_names:
+            # Записываем в rule допустимые расширения.
             file_extensions_path = os.path.join(
                 relative_path,
                 folder,
@@ -234,33 +234,33 @@ def get_orders(relative_path):
                     number = n
             if number is not None:
                 text_list.pop(number)
-                order.can_copy_folders = True
+                rule.can_copy_folders = True
 
-            order.extensions = text_list
-            # Записываем в order допустимые начала имен.
+            rule.extensions = text_list
+            # Записываем в rule допустимые начала имен.
             for_names_path = os.path.join(
                 relative_path,
                 folder,
                 FIRST_PARTS_OF_NAMES_STORAGE,
             )
             text_list = get_list_of_strings_from_file(for_names_path)
-            order.firsts_parts = text_list
-            # Записываем в order допустимые окончания имен.
+            rule.firsts_parts = text_list
+            # Записываем в rule допустимые окончания имен.
             for_names_path = os.path.join(
                 relative_path,
                 folder,
                 LAST_PARTS_OF_NAMES_STORAGE,
             )
             text_list = get_list_of_strings_from_file(for_names_path)
-            order.last_parts = text_list
+            rule.last_parts = text_list
         # Записываем полные имена файлов.
         else:
-            # Записываем в order список файлов для копирования.
+            # Записываем в rule список файлов для копирования.
             full_names_path = os.path.join(
                 relative_path,
                 folder,
                 FULL_NAMES_STORAGE,
             )
             text_list = get_list_of_strings_from_file(full_names_path)
-            order.full_names = text_list
+            rule.full_names = text_list
     return orders

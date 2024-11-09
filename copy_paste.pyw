@@ -5,7 +5,7 @@ from Code.CONSTANTS import (
     FOLDER_WITH_ORDERS,
     INITIAL_DIR,
 )
-from Code.order import get_orders
+from Code.rule import get_orders
 from Code.error_message_box import ErrorGui
 from Code.gui import Gui
 
