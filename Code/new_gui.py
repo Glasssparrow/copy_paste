@@ -67,19 +67,24 @@ class Gui:
         self.radiobutton_position = tk.IntVar(value=2)
         self._radiobutton0 = tk.Radiobutton(
             text="полная информация",
-            variable=self.radiobutton_position, value=0, command=self._recreate_info_for_user)
+            variable=self.radiobutton_position,
+            value=0, command=self._recreate_info_for_user)
         self._radiobutton1 = tk.Radiobutton(
             text="целевые папки, выбранные подпапки (после копирования)",
-            variable=self.radiobutton_position, value=1, command=self._recreate_info_for_user)
+            variable=self.radiobutton_position,
+            value=1, command=self._recreate_info_for_user)
         self._radiobutton2 = tk.Radiobutton(
             text="псевдонимы, выбранные подпапки (после копирования)",
-            variable=self.radiobutton_position, value=2, command=self._recreate_info_for_user)
+            variable=self.radiobutton_position,
+            value=2, command=self._recreate_info_for_user)
         self._radiobutton3 = tk.Radiobutton(
             text="имена файлов и правила копирования",
-            variable=self.radiobutton_position, value=3, command=self._recreate_info_for_user)
+            variable=self.radiobutton_position,
+            value=3, command=self._recreate_info_for_user)
         self._radiobutton4 = tk.Radiobutton(
             text="только имена файлов",
-            variable=self.radiobutton_position, value=4, command=self._recreate_info_for_user)
+            variable=self.radiobutton_position,
+            value=4, command=self._recreate_info_for_user)
         self._radiobutton0.grid(column=0, row=3)
         self._radiobutton1.grid(column=1, row=3)
         self._radiobutton2.grid(column=2, row=3)
