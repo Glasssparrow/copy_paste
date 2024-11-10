@@ -1,7 +1,15 @@
 import tkinter as tk
 from tkinter import filedialog as fd
 from tkinter import Button, Tk, Label
-import os
+from Code.get_list_of_folders_or_files import (
+    get_list_of_folders_names,
+    get_list_of_files_names,
+)
+from Code.copy_folder_or_file import (
+    copy_folder,
+    copy_file,
+)
+from Code.create_order import get_order
 
 
 class Gui:
@@ -22,6 +30,9 @@ class Gui:
 
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
+        folders = get_list_of_folders_names(self.initial_directory)
+        files = get_list_of_files_names(self.initial_directory)
+        order = get_order(folders=folders, files=files)
         self._recreate_info_for_user()
 
     def _copy_files(self):
@@ -29,8 +40,8 @@ class Gui:
 
     def __init__(self, rules, initial_directory):
         # Исходная папка
-        self.initial_directory = "test"
-        self.orders = None
+        self.initial_directory = initial_directory
+        self.rules = rules
         # Оформление окна
         self._window = Tk()
         self._window.title(self.title_text)
