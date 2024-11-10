@@ -22,30 +22,36 @@ class Матрешка:
             element.set_status(status)
 
 
+# Полный приказ на копирование.
 class Order(Матрешка):
 
     def __init__(self):
         super().__init__()
 
 
+# Правила для отдельного файла (или папки)
 class RulesForName(Матрешка):
 
-    def __init__(self):
+    def __init__(self, is_folder: bool):
         super().__init__()
+        self.is_folder = is_folder
 
 
+# Пути копирования для отдельного файла.
 class PathsForRule(Матрешка):
 
     def __init__(self):
         super().__init__()
 
 
+# Подпапки для каждого пути.
 class FolderForPaths(Матрешка):
 
     def __init__(self):
         super().__init__()
 
 
+# Отдельная подпапка.
 class Folder:
 
     def __init__(self):
