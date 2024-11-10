@@ -10,7 +10,7 @@
 # поступал приказ копировать (они были выделены), а на какие - нет.
 
 
-class Common:
+class Матрешка:
 
     def __init__(self):
         self.data = []
@@ -22,25 +22,25 @@ class Common:
             element.set_status(status)
 
 
-class Order(Common):
+class Order(Матрешка):
 
     def __init__(self):
         super().__init__()
 
 
-class RulesForName(Common):
+class RulesForName(Матрешка):
 
     def __init__(self):
         super().__init__()
 
 
-class PathsForRule(Common):
+class PathsForRule(Матрешка):
 
     def __init__(self):
         super().__init__()
 
 
-class FolderForPaths(Common):
+class FolderForPaths(Матрешка):
 
     def __init__(self):
         super().__init__()
