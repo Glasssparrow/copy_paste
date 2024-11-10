@@ -1,5 +1,5 @@
 from Code.order import *
 
 
-def get_order(folders, files):
+def get_order(rules, folders, files):
     pass
