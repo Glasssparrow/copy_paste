@@ -30,8 +30,18 @@ class Gui:
 
     # Функция выбора пути к папке с исходными данными
     def _choose_folder(self):
-        folders = get_list_of_folders_names(self.initial_directory)
-        files = get_list_of_files_names(self.initial_directory)
+        # TODO
+        # Отработать ситуацию при отказе пользователя от
+        # выбора папки.
+        self.chosen_directory = (
+            fd.askdirectory(
+                title="Выберите папку",
+                initialdir=self.initial_directory)
+        )
+        # Показываем путь пользователю.
+        self._text_folder.configure(text=self.chosen_directory)
+        folders = get_list_of_folders_names(self.chosen_directory)
+        files = get_list_of_files_names(self.chosen_directory)
         order = get_order(folders=folders, files=files)
         self._recreate_info_for_user()
 
@@ -41,6 +51,7 @@ class Gui:
     def __init__(self, rules, initial_directory):
         # Исходная папка
         self.initial_directory = initial_directory
+        self.chosen_directory = None
         self.rules = rules
         # Оформление окна
         self._window = Tk()
