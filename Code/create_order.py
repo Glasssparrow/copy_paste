@@ -2,4 +2,4 @@ from Code.order import *
 
 
 def get_order(rules, folders, files):
-    pass
+    order = Order()
