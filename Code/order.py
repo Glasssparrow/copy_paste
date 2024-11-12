@@ -9,9 +9,6 @@ from Code.CONSTANTS import (
     WAS_COPIED,
 )
 
-# Класс должен содержать всю необходимую информацию для копирования.
-# Класс должен содержать всю необходимую информацию о результатах копирования.
-
 
 class Матрешка:
 
@@ -104,7 +101,7 @@ class Order(Матрешка):
 # Отдельный файл(или папка). Содержит правила подходящие для него.
 class RulesForName(Матрешка):
 
-    def __init__(self, is_folder: bool, name):
+    def __init__(self, is_folder: bool, name: str):
         super().__init__()
         self.name = name
         self.is_folder = is_folder
@@ -121,7 +118,7 @@ class PathsForRule(Матрешка):
 # Отделный путь копирования. Содержит папки для копирования.
 class FolderForPath(Матрешка):
 
-    def __init__(self, path):
+    def __init__(self, path: str):
         super().__init__()
         self.path = path
 
@@ -129,6 +126,6 @@ class FolderForPath(Матрешка):
 # Отдельная папка.
 class Folder:
 
-    def __init__(self, folder):
+    def __init__(self, folder: str):
         self.status = "should be copied"
         self.folder = folder
