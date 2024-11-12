@@ -82,16 +82,16 @@ class Матрешка:
             )
 
     def __getitem__(self, item):
-        pass
+        return self.data[item]
 
     def __setitem__(self, key, value):
-        pass
+        self.data[key] = value
 
     def __delitem__(self, item):
-        pass
+        self.data.pop(item)
 
     def append(self, item):
-        pass
+        self.data.append(item)
 
 
 # Полный приказ на копирование.
