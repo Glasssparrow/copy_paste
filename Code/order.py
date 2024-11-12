@@ -30,6 +30,9 @@ class Матрешка:
     def __delitem__(self, item):
         pass
 
+    def append(self, item):
+        pass
+
 
 # Полный приказ на копирование.
 class Order(Матрешка):
