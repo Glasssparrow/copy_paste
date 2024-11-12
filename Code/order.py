@@ -21,6 +21,15 @@ class Матрешка:
         for element in self.data:
             element.set_status(status)
 
+    def __getitem__(self, item):
+        pass
+
+    def __setitem__(self, key, value):
+        pass
+
+    def __delitem__(self, item):
+        pass
+
 
 # Полный приказ на копирование.
 class Order(Матрешка):
