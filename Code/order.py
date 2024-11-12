@@ -94,37 +94,41 @@ class Матрешка:
         self.data.append(item)
 
 
-# Полный приказ на копирование.
+# Полный приказ на копирование. Содержит правила.
 class Order(Матрешка):
 
     def __init__(self):
         super().__init__()
 
 
-# Правила для отдельного файла (или папки)
+# Отдельный файл(или папка). Содержит правила подходящие для него.
 class RulesForName(Матрешка):
 
-    def __init__(self, is_folder: bool):
+    def __init__(self, is_folder: bool, name):
         super().__init__()
+        self.name = name
         self.is_folder = is_folder
 
 
-# Пути копирования для отдельного файла.
+# Отдельное правило для копирования. Содержит пути копирования.
 class PathsForRule(Матрешка):
 
-    def __init__(self):
+    def __init__(self, rule):
         super().__init__()
+        self.rule = rule
 
 
-# Подпапки для каждого пути.
-class FolderForPaths(Матрешка):
+# Отделный путь копирования. Содержит папки для копирования.
+class FolderForPath(Матрешка):
 
-    def __init__(self):
+    def __init__(self, path):
         super().__init__()
+        self.path = path
 
 
-# Отдельная подпапка.
+# Отдельная папка.
 class Folder:
 
-    def __init__(self):
+    def __init__(self, folder):
         self.status = "should be copied"
+        self.folder = folder
