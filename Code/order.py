@@ -16,10 +16,25 @@ class Матрешка:
         self.data = []
         self.status = "should be copied"
 
-    def set_status(self, status):
-        self.status = status
-        for element in self.data:
-            element.set_status(status)
+    def ask_status(self):
+        succesful = 0
+        not_succesful = 0
+        for element in data:
+            if element.status == "SUCCESFUL":
+                succesful += 1
+            else:
+                not_succesful += 1
+
+    def _choose_status(done, not_done):
+        if (done + not_done) <= 0:
+            raise Exception("something went wrong")
+        if not_done = 0:
+            return 1
+        elif done = 0:
+            return 0
+        else:
+            return 0.5
+        
 
     def _validate_key(key):
         if not isinstance(key, int):
