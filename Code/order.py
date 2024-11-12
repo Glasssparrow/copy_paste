@@ -1,4 +1,11 @@
-
+from Code.CONSTANTS import (
+    SHOULD_BE_COPIED,
+    SHOULD_BE_COPIED_PARTIALLY,
+    SHOULD_NOT_BE_COPIED,
+    SUCCESFUL,
+    PARTIALLY_SUCCESFUL,
+    NOT_SUCCESFUL,
+)
 
 # Создать класс команды на копирование.
 # Order переименовать в Rule во избежание путаницы.
