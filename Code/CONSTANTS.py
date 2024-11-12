@@ -22,3 +22,14 @@ FULL_NAMES_STORAGE = "список файлов для копирования.tx
 
 # Метка разрешения копирования папок в FILE_EXTENSIONS_STORAGE
 CAN_COPY_FOLDERS = "папка"
+
+
+# Статусы копирования
+SHOULD_BE_COPIED = "1"
+SHOULD_BE_COPIED_PARTIALLY = "0.5"
+SHOULD_NOT_BE_COPIED = "0"
+
+SUCCESFUL = "1"
+PARTIALLY_SUCCESFUL = "0.5"
+NOT_SUCCESFUL = "0"
+
