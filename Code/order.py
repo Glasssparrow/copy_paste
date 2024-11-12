@@ -21,6 +21,16 @@ class Матрешка:
         for element in self.data:
             element.set_status(status)
 
+    def _validate_key(key):
+        if not isinstance(key, int):
+            raise Exception(
+                f"{key} должно быть целым числом (int)"
+            )
+        if key >= len(self.data):
+            raise Exception(
+                f"{key} >= количества данных"
+            )
+
     def __getitem__(self, item):
         pass
 
