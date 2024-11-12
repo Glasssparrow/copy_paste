@@ -7,7 +7,7 @@ def add_element_to_order(
 ):
     for rule in rules:
         if rule.should_be_copied(element, is_folder):
-            paths = order.get_paths(
+            paths = rule.get_paths(
                 directory=source_folder,
                 is_folder_and_not_a_file=is_folder,
                 name_of_file_or_folder=element,
