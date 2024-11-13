@@ -116,11 +116,19 @@ class PathsForRule(Матрешка):
 
 
 # Отделный путь копирования. Содержит папки для копирования.
-class FolderForPath(Матрешка):
+class FoldersForPath(Матрешка):
 
     def __init__(self, path: str):
         super().__init__()
         self.path = path
+
+    def _how_much_done(done, not_done):
+        if (done + not_done) <= 0:
+            raise Exception("something went wrong")
+        if done >= 0:
+            return 1
+        else:
+            return 0
 
 
 # Отдельная папка.
