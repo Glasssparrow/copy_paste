@@ -58,14 +58,17 @@ class Матрешка:
                 self.status = SHOULD_BE_COPIED
 
     def _how_much_done(done, not_done):
-        if (done + not_done) <= 0:
-            raise Exception("something went wrong")
+        self._validate_done_not_done(done, not_done)
         if not_done == 0:
             return 1
         elif done == 0:
             return 0
         else:
             return 0.5
+
+    def _validate_done_not_done(done, not_done):
+        if (done + not_done) <= 0:
+            raise Exception("something went wrong")
         
 
     def _validate_key(key):
@@ -123,8 +126,7 @@ class FoldersForPath(Матрешка):
         self.path = path
 
     def _how_much_done(done, not_done):
-        if (done + not_done) <= 0:
-            raise Exception("something went wrong")
+        self._validate_done_not_done(done, not_done)
         if done >= 0:
             return 1
         else:
