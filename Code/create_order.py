@@ -8,6 +8,9 @@ def add_element_to_order(
         ):
     folder_or_file = RulesForName(name=element, is_folder=is_folder)
     order.append(folder_or_file)
+    for rule in rules:
+        paths_for_rule = PathsForRule(rule=rule)
+        folder_or_file.append(paths_for_rule)
 
 
 def process_element(
