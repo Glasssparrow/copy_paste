@@ -2,11 +2,12 @@ from Code.order import *
 
 
 def add_element_to_order(
-            rules=rules, order=order,
-            element=folder, is_folder=True,
-            source_folder=source_folder,
+            rules, order,
+            element, is_folder,
+            source_folder,
         ):
-    pass
+    folder_or_file = RulesForName(name=element, is_folder=is_folder)
+    order.append(folder_or_file)
 
 
 def process_element(
@@ -20,7 +21,7 @@ def process_element(
     if rules_should_be_applyed:
         add_element_to_order(
             rules=rules_should_be_applyed, order=order,
-            element=folder, is_folder=True,
+            element=element, is_folder=is_folder,
             source_folder=source_folder,
         )
 
