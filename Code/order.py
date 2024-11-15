@@ -31,6 +31,9 @@ class Матрешка:
                 succesful += 1
             else:
                 not_succesful += 1
+            # Если статус (задание/результат) элемента не
+            # совпадает со статусом первого элемента, значит
+            # случилась какая-то путаница.
             if (
                 not first_iteration and
                 ((was_copied and element.status in WASNT_COPIED) or
