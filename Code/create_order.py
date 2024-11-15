@@ -5,13 +5,10 @@ def add_element_to_order(
         rules, source_folder,
         order, element, is_folder: bool
 ):
+    rules_should_be_applyed = []
     for rule in rules:
         if rule.should_be_copied(element, is_folder):
-            paths = rule.get_paths(
-                directory=source_folder,
-                is_folder_and_not_a_file=is_folder,
-                name_of_file_or_folder=element,
-            )
+            rules_should_be_applyed.append(rule)
 
 
 def get_order(rules, folders, files, source_folder):
