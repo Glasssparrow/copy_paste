@@ -14,6 +14,9 @@ def add_element_to_order(
         for path in rule.target:
             folders_for_path = FoldersForPath(path)
             paths_for_rule.append(folders_for_path)
+            for folder in rule.folders_options:
+                folder_option = Folder(folder)
+                folders_for_path.append(folder_option)
 
 
 def process_element(
