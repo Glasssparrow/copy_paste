@@ -19,7 +19,7 @@ import os
 
 class Rule:
 
-    def __init__(self, name: str, only_full_names: bool):
+    def __init__(self, name: str):
         self.name = name  # Имя правила
 
         self.target = None  # Пути к папкам проектов
@@ -27,16 +27,10 @@ class Rule:
 
         self.can_copy_folders = False
 
-        # Полные имена или правила выбора файлов
-        self.only_full_names = only_full_names
-
         # Для случая, когда self.only_full_names == False
         self.extensions = None  # Расширения
         self.firsts_parts = None  # Начала имен
         self.last_parts = None  # Окончания имен
-
-        # Для случая, когда self.only_full_names == True
-        self.full_names = None  # Полные имена файлов
 
     def should_be_copied(self, name_with_extension, is_folder: bool, full_path=False):
         if is_folder and not self.can_copy_folders:
@@ -45,55 +39,51 @@ class Rule:
         if full_path:
             name_with_extension = os.path.basename(
                 name_with_extension)
-        if not self.only_full_names:
-            # Если ограничений совсем нет, то что-то не так.
-            if (
-                not self.firsts_parts and
-                not self.last_parts and
-                (not self.extensions and not self.can_copy_folders)
-            ):
-                raise Exception(
-                    f"Не найдены правила для {self.name}"
-                )
-            # Проверяем проходит ли расширение
-            extension_fit = False
-            for extension in self.extensions:
-                # Расширение должно совпадать с
-                # правилом на копирование.
-                file_extension = os.path.splitext(name_with_extension)[1]
-                if file_extension == extension:
-                    extension_fit = True
-            # Проверяем проходит ли имя
-            last_part_of_name_fit = False
-            for name_requirement in self.last_parts:
-                # Окончание имени должно совпадать с
-                # правилом на копирование.
-                if not is_folder:
-                    file_name = os.path.splitext(name_with_extension)[0]
-                else:
-                    file_name = name_with_extension
-                if file_name[-len(name_requirement):] == name_requirement:
-                    last_part_of_name_fit = True
-            first_part_of_name_fit = False
-            for name_requirement in self.firsts_parts:
-                # Начало имени должно совпадать с
-                # правилом на копирование.
-                if not is_folder:
-                    file_name = os.path.splitext(name_with_extension)[0]
-                else:
-                    file_name = name_with_extension
-                if file_name[:len(name_requirement)] == name_requirement:
-                    first_part_of_name_fit = True
+        # Если ограничений совсем нет, то что-то не так.
+        if (
+            not self.firsts_parts and
+            not self.last_parts and
+            (not self.extensions and not self.can_copy_folders)
+        ):
+            raise Exception(
+                f"Не найдены правила для {self.name}"
+            )
+        # Проверяем проходит ли расширение
+        extension_fit = False
+        for extension in self.extensions:
+            # Расширение должно совпадать с
+            # правилом на копирование.
+            file_extension = os.path.splitext(name_with_extension)[1]
+            if file_extension == extension:
+                extension_fit = True
+        # Проверяем проходит ли имя
+        last_part_of_name_fit = False
+        for name_requirement in self.last_parts:
+            # Окончание имени должно совпадать с
+            # правилом на копирование.
+            if not is_folder:
+                file_name = os.path.splitext(name_with_extension)[0]
+            else:
+                file_name = name_with_extension
+            if file_name[-len(name_requirement):] == name_requirement:
+                last_part_of_name_fit = True
+        first_part_of_name_fit = False
+        for name_requirement in self.firsts_parts:
+            # Начало имени должно совпадать с
+            # правилом на копирование.
+            if not is_folder:
+                file_name = os.path.splitext(name_with_extension)[0]
+            else:
+                file_name = name_with_extension
+            if file_name[:len(name_requirement)] == name_requirement:
+                first_part_of_name_fit = True
 
-            # Если все три условия выполняются или отсутствуют, то
-            # возвращаем True.
-            if not self.firsts_parts or first_part_of_name_fit:
-                if not self.last_parts or last_part_of_name_fit:
-                    if not self.extensions or extension_fit or is_folder:
-                        return True
-        else:
-            if name_with_extension in self.full_names:
-                return True
+        # Если все три условия выполняются или отсутствуют, то
+        # возвращаем True.
+        if not self.firsts_parts or first_part_of_name_fit:
+            if not self.last_parts or last_part_of_name_fit:
+                if not self.extensions or extension_fit or is_folder:
+                    return True
         return False
 
     @staticmethod
@@ -178,14 +168,7 @@ def get_orders(relative_path):
                 FIRST_PARTS_OF_NAMES_STORAGE in files and
                 LAST_PARTS_OF_NAMES_STORAGE in files
         ):
-            rule = Rule(name=folder, only_full_names=False)
-            orders.append(rule)
-        elif (
-                TARGET_DIRECTORIES_STORAGE in files and
-                TARGET_FOLDER_STORAGE in files and
-                FULL_NAMES_STORAGE in files
-        ):
-            rule = Rule(name=folder, only_full_names=True)
+            rule = Rule(name=folder)
             orders.append(rule)
         else:
             # Если что-то не нашли в правиле - исключение.
@@ -220,47 +203,36 @@ def get_orders(relative_path):
         rule.folders_options = text_list
 
         # Формируем правила для выбора файлов.
-        if not rule.only_full_names:
-            # Записываем в rule допустимые расширения.
-            file_extensions_path = os.path.join(
-                relative_path,
-                folder,
-                FILE_EXTENSIONS_STORAGE,
-            )
-            text_list = get_list_of_strings_from_file(file_extensions_path)
-            number = None
-            for n, line in enumerate(text_list):
-                if line == CAN_COPY_FOLDERS:
-                    number = n
-            if number is not None:
-                text_list.pop(number)
-                rule.can_copy_folders = True
+        # Записываем в rule допустимые расширения.
+        file_extensions_path = os.path.join(
+            relative_path,
+            folder,
+            FILE_EXTENSIONS_STORAGE,
+        )
+        text_list = get_list_of_strings_from_file(file_extensions_path)
+        number = None
+        for n, line in enumerate(text_list):
+            if line == CAN_COPY_FOLDERS:
+                number = n
+        if number is not None:
+            text_list.pop(number)
+            rule.can_copy_folders = True
 
-            rule.extensions = text_list
-            # Записываем в rule допустимые начала имен.
-            for_names_path = os.path.join(
-                relative_path,
-                folder,
-                FIRST_PARTS_OF_NAMES_STORAGE,
-            )
-            text_list = get_list_of_strings_from_file(for_names_path)
-            rule.firsts_parts = text_list
-            # Записываем в rule допустимые окончания имен.
-            for_names_path = os.path.join(
-                relative_path,
-                folder,
-                LAST_PARTS_OF_NAMES_STORAGE,
-            )
-            text_list = get_list_of_strings_from_file(for_names_path)
-            rule.last_parts = text_list
-        # Записываем полные имена файлов.
-        else:
-            # Записываем в rule список файлов для копирования.
-            full_names_path = os.path.join(
-                relative_path,
-                folder,
-                FULL_NAMES_STORAGE,
-            )
-            text_list = get_list_of_strings_from_file(full_names_path)
-            rule.full_names = text_list
+        rule.extensions = text_list
+        # Записываем в rule допустимые начала имен.
+        for_names_path = os.path.join(
+            relative_path,
+            folder,
+            FIRST_PARTS_OF_NAMES_STORAGE,
+        )
+        text_list = get_list_of_strings_from_file(for_names_path)
+        rule.firsts_parts = text_list
+        # Записываем в rule допустимые окончания имен.
+        for_names_path = os.path.join(
+            relative_path,
+            folder,
+            LAST_PARTS_OF_NAMES_STORAGE,
+        )
+        text_list = get_list_of_strings_from_file(for_names_path)
+        rule.last_parts = text_list
     return orders
