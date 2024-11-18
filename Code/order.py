@@ -73,9 +73,8 @@ class Матрешка:
     def _validate_done_not_done(done, not_done):
         if (done + not_done) <= 0:
             raise Exception("something went wrong")
-        
 
-    def _validate_key(key):
+    def _validate_key(self, key):
         if not isinstance(key, int):
             raise Exception(
                 f"{key} должно быть целым числом (int)"
