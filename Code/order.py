@@ -7,6 +7,7 @@ from Code.CONSTANTS import (
     NOT_SUCCESFUL,
     WASNT_COPIED,
     WAS_COPIED,
+    YES,
 )
 
 
@@ -21,7 +22,7 @@ class Матрешка:
         not_succesful = 0
         first_iteration = True
         was_copied = None
-        for element in data:
+        for element in self.data:
             if first_iteration:
                 if element.status in WAS_COPIED:
                     was_copied = True
