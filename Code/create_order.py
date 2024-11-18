@@ -23,13 +23,13 @@ def process_element(
         rules, source_folder,
         order, element, is_folder: bool
 ):
-    rules_should_be_applyed = []
+    rules_should_be_applied = []
     for rule in rules:
         if rule.should_be_copied(element, is_folder):
-            rules_should_be_applyed.append(rule)
-    if rules_should_be_applyed:
+            rules_should_be_applied.append(rule)
+    if rules_should_be_applied:
         add_element_to_order(
-            rules=rules_should_be_applyed, order=order,
+            rules=rules_should_be_applied, order=order,
             element=element, is_folder=is_folder,
             source_folder=source_folder,
         )

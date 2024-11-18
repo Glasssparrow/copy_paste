@@ -18,8 +18,8 @@ class Матрешка:
         self.status = SHOULD_BE_COPIED
 
     def ask_status(self):
-        succesful = 0
-        not_succesful = 0
+        successful = 0
+        not_successful = 0
         first_iteration = True
         was_copied = None
         for element in self.data:
@@ -29,9 +29,9 @@ class Матрешка:
                 else:
                     was_copied = False
             if element.status in YES:
-                succesful += 1
+                successful += 1
             else:
-                not_succesful += 1
+                not_successful += 1
             # Если статус (задание/результат) элемента не
             # совпадает со статусом первого элемента, значит
             # случилась какая-то путаница.
@@ -45,7 +45,7 @@ class Матрешка:
                     "а часть как задание на копирование"
                 )
             first_iteration = False
-        done = self._how_much_done(succesful, not_succesful)
+        done = self._how_much_done(successful, not_successful)
         if was_copied:
             if done == 0:
                 self.status = NOT_SUCCESFUL
