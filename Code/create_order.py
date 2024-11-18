@@ -13,6 +13,7 @@ def add_element_to_order(
         folder_or_file.append(paths_for_rule)
         for path in rule.target:
             folders_for_path = FoldersForPath(path)
+            paths_for_rule.append(folders_for_path)
 
 
 def process_element(
