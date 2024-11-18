@@ -60,7 +60,7 @@ class Матрешка:
             elif done == 1:
                 self.status = SHOULD_BE_COPIED
 
-    def _how_much_done(done, not_done):
+    def _how_much_done(self, done, not_done):
         self._validate_done_not_done(done, not_done)
         if not_done == 0:
             return 1
@@ -69,6 +69,7 @@ class Матрешка:
         else:
             return 0.5
 
+    @staticmethod
     def _validate_done_not_done(done, not_done):
         if (done + not_done) <= 0:
             raise Exception("something went wrong")
