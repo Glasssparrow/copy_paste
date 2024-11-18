@@ -128,7 +128,7 @@ class FoldersForPath(Матрешка):
         super().__init__()
         self.path = path
 
-    def _how_much_done(done, not_done):
+    def _how_much_done(self, done, not_done):
         self._validate_done_not_done(done, not_done)
         if done >= 0:
             return 1
