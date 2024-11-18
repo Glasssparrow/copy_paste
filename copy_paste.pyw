@@ -10,6 +10,9 @@ from Code.error_message_box import ErrorGui
 from Code.new_gui import Gui
 
 
+# TODO
+# Убрать возможность настраивать копирование по полному имени файла.
+# В этой фиче нет необходимости, а код она усложняет.
 try:
     # Читаем инструкции: какие файлы куда копировать.
     rules = get_orders(FOLDER_WITH_ORDERS)
