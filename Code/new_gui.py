@@ -9,6 +9,7 @@ from Code.copy_folder_or_file import (
     copy_folder,
     copy_file,
 )
+from Code.order import Order
 from Code.create_order import get_order
 import os
 
@@ -47,7 +48,7 @@ class Gui:
         files = get_list_of_files_names(self.chosen_directory)
         self.order = Order()
         order = get_order(
-            order=self.order
+            order=self.order,
             folders=folders, files=files,
             rules=self.rules, source_folder=self.chosen_directory,
             )
