@@ -7,6 +7,7 @@ from Code.CONSTANTS import (
     NOT_SUCCESFUL,
     WASNT_COPIED,
     WAS_COPIED,
+    YES,
 )
 
 
@@ -17,20 +18,20 @@ class Матрешка:
         self.status = SHOULD_BE_COPIED
 
     def ask_status(self):
-        succesful = 0
-        not_succesful = 0
+        successful = 0
+        not_successful = 0
         first_iteration = True
         was_copied = None
-        for element in data:
+        for element in self.data:
             if first_iteration:
                 if element.status in WAS_COPIED:
                     was_copied = True
                 else:
                     was_copied = False
             if element.status in YES:
-                succesful += 1
+                successful += 1
             else:
-                not_succesful += 1
+                not_successful += 1
             # Если статус (задание/результат) элемента не
             # совпадает со статусом первого элемента, значит
             # случилась какая-то путаница.
@@ -44,7 +45,7 @@ class Матрешка:
                     "а часть как задание на копирование"
                 )
             first_iteration = False
-        done = self._how_much_done(succesful, not_succesful)
+        done = self._how_much_done(successful, not_successful)
         if was_copied:
             if done == 0:
                 self.status = NOT_SUCCESFUL
@@ -60,7 +61,7 @@ class Матрешка:
             elif done == 1:
                 self.status = SHOULD_BE_COPIED
 
-    def _how_much_done(done, not_done):
+    def _how_much_done(self, done, not_done):
         self._validate_done_not_done(done, not_done)
         if not_done == 0:
             return 1
@@ -69,12 +70,12 @@ class Матрешка:
         else:
             return 0.5
 
+    @staticmethod
     def _validate_done_not_done(done, not_done):
         if (done + not_done) <= 0:
             raise Exception("something went wrong")
-        
 
-    def _validate_key(key):
+    def _validate_key(self, key):
         if not isinstance(key, int):
             raise Exception(
                 f"{key} должно быть целым числом (int)"
@@ -128,7 +129,7 @@ class FoldersForPath(Матрешка):
         super().__init__()
         self.path = path
 
-    def _how_much_done(done, not_done):
+    def _how_much_done(self, done, not_done):
         self._validate_done_not_done(done, not_done)
         if done >= 0:
             return 1
