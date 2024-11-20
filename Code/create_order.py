@@ -35,8 +35,7 @@ def process_element(
         )
 
 
-def get_order(rules, folders, files, source_folder):
-    order = Order()
+def get_order(order, rules, folders, files, source_folder):
     for folder in folders:
         process_element(
             rules=rules, order=order,

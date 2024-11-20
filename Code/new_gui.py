@@ -45,7 +45,9 @@ class Gui:
         self._text_folder.configure(text=self.chosen_directory)
         folders = get_list_of_folders_names(self.chosen_directory)
         files = get_list_of_files_names(self.chosen_directory)
+        self.order = Order()
         order = get_order(
+            order=self.order
             folders=folders, files=files,
             rules=self.rules, source_folder=self.chosen_directory,
             )
