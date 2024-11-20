@@ -10,6 +10,7 @@ from Code.copy_folder_or_file import (
     copy_file,
 )
 from Code.create_order import get_order
+import os
 
 
 class Gui:
@@ -39,6 +40,8 @@ class Gui:
                 initialdir=self.initial_directory)
         )
         # Показываем путь пользователю.
+        self.project_name = os.path.basename(self.chosen_directory)
+        self._text_path.configure(text=self.project_name)
         self._text_folder.configure(text=self.chosen_directory)
         folders = get_list_of_folders_names(self.chosen_directory)
         files = get_list_of_files_names(self.chosen_directory)
