@@ -32,7 +32,10 @@ class Gui:
             width=220, height=29,
             selectmode=tk.MULTIPLE, selectbackground="blue"
         )
-        self.info_list = get_info_list(mode=self.radiobutton_position.get())
+        self.info_list = get_info_list(
+            mode=self.radiobutton_position.get(),
+            order=self.order,
+        )
         for x in self.info_list:
             self._text_warning.insert(0, x)
         self._text_warning.grid(columnspan=6, column=0, row=5)
