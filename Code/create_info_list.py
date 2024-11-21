@@ -7,7 +7,7 @@ from Code.CONSTANTS import (
 )
 
 
-def get_info_list(mode, order):
+def get_info_list(mode, order, after_copying: bool):
     info_list = []
     for rules_for_file in order.data:
         if rules_for_file.is_folder:

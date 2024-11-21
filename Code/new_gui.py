@@ -35,6 +35,7 @@ class Gui:
         self.info_list = get_info_list(
             mode=self.radiobutton_position.get(),
             order=self.order,
+            after_copying=self.after_copying,
         )
         for x in self.info_list:
             self._text_warning.insert(0, x)
@@ -50,6 +51,7 @@ class Gui:
                 title="Выберите папку",
                 initialdir=self.initial_directory)
         )
+        self.after_copying = False
         # Показываем путь пользователю.
         self.project_name = os.path.basename(self.chosen_directory)
         self._text_path.configure(text=self.project_name)
@@ -65,7 +67,7 @@ class Gui:
         self._recreate_info_for_user()
 
     def _copy_files(self):
-        pass
+        self.after_copying = True
 
     def __init__(self, rules, initial_directory):
         # Исходная папка
