@@ -1,3 +1,10 @@
+from Code.CONSTANTS import (
+    FULL_INFO,
+    TARGET_FOLDERS,
+    MASKS,
+    NAMES_AND_RULES,
+    ONLY_NAMES,
+)
 
 
 def get_info_list():
