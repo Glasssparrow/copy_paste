@@ -9,6 +9,9 @@ from Code.CONSTANTS import (
 
 def get_info_list(mode, order):
     info_list = []
-    for x in range(15):
-        info_list.append(x)
+    for rules_for_file in order.data:
+        for paths_for_rule in rules_for_file.data:
+            for folders_for_path in paths_for_rule.data:
+                for folder in folders_for_path.data:
+                    pass
     return info_list
