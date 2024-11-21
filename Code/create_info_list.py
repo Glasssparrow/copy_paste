@@ -7,7 +7,7 @@ from Code.CONSTANTS import (
 )
 
 
-def get_info_list():
+def get_info_list(mode):
     info_list = []
     for x in range(15):
         info_list.append(x)
