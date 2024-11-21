@@ -10,7 +10,10 @@ from Code.CONSTANTS import (
 def get_info_list(mode, order):
     info_list = []
     for rules_for_file in order.data:
-        info_list.append(rules_for_file.name)
+        if rules_for_file.is_folder:
+            info_list.append(f"(папка){rules_for_file.name}")
+        else:
+            info_list.append(rules_for_file.name)
         for paths_for_rule in rules_for_file.data:
             if mode in [
                 FULL_INFO,
@@ -29,4 +32,5 @@ def get_info_list(mode, order):
                         FULL_INFO,
                     ]:
                         info_list.append(folder.folder)
+    info_list.reverse()  # Разворачиваем т.к. элементы добавлялись в конец
     return info_list
