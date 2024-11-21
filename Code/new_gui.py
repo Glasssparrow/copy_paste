@@ -11,6 +11,7 @@ from Code.copy_folder_or_file import (
 )
 from Code.order import Order
 from Code.create_order import fill_order
+from Code.create_info_list import get_info_list
 import os
 
 
@@ -24,10 +25,9 @@ class Gui:
             width=220, height=29,
             selectmode=tk.MULTIPLE, selectbackground="blue"
         )
-        for x in range(100):
-            self._text_warning.insert(
-                0, "Копирование не выполнялось" + str(x)
-            )
+        self.info_list = get_info_list()
+        for x in self.info_list:
+            self._text_warning.insert(0, x)
         self._text_warning.grid(columnspan=6, column=0, row=5)
 
     # Функция выбора пути к папке с исходными данными
