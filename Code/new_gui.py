@@ -1,6 +1,13 @@
 import tkinter as tk
 from tkinter import filedialog as fd
 from tkinter import Button, Tk, Label
+from Code.CONSTANTS import (
+    FULL_INFO,
+    TARGET_FOLDERS,
+    MASKS,
+    NAMES_AND_RULES,
+    ONLY_NAMES,
+)
 from Code.get_list_of_folders_or_files import (
     get_list_of_folders_names,
     get_list_of_files_names,
@@ -97,23 +104,23 @@ class Gui:
         self._radiobutton0 = tk.Radiobutton(
             text="полная информация",
             variable=self.radiobutton_position,
-            value=0, command=self._recreate_info_for_user)
+            value=FULL_INFO, command=self._recreate_info_for_user)
         self._radiobutton1 = tk.Radiobutton(
             text="целевые папки, выбранные подпапки (после копирования)",
             variable=self.radiobutton_position,
-            value=1, command=self._recreate_info_for_user)
+            value=TARGET_FOLDERS, command=self._recreate_info_for_user)
         self._radiobutton2 = tk.Radiobutton(
             text="псевдонимы, выбранные подпапки (после копирования)",
             variable=self.radiobutton_position,
-            value=2, command=self._recreate_info_for_user)
+            value=MASKS, command=self._recreate_info_for_user)
         self._radiobutton3 = tk.Radiobutton(
             text="имена файлов и правила копирования",
             variable=self.radiobutton_position,
-            value=3, command=self._recreate_info_for_user)
+            value=NAMES_AND_RULES, command=self._recreate_info_for_user)
         self._radiobutton4 = tk.Radiobutton(
             text="только имена файлов",
             variable=self.radiobutton_position,
-            value=4, command=self._recreate_info_for_user)
+            value=ONLY_NAMES, command=self._recreate_info_for_user)
         self._radiobutton0.grid(column=0, row=3)
         self._radiobutton1.grid(column=1, row=3)
         self._radiobutton2.grid(column=2, row=3)
