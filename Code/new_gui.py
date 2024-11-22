@@ -12,10 +12,7 @@ from Code.get_list_of_folders_or_files import (
     get_list_of_folders_names,
     get_list_of_files_names,
 )
-from Code.copy_folder_or_file import (
-    copy_folder,
-    copy_file,
-)
+from Code.execute_order import copy_files
 from Code.order import Order
 from Code.create_order import fill_order
 from Code.create_info_list import get_info_list
@@ -68,6 +65,7 @@ class Gui:
 
     def _copy_files(self):
         self.after_copying = True
+        copy_files()
 
     def __init__(self, rules, initial_directory):
         # Исходная папка
