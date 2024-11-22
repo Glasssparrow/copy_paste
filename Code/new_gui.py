@@ -65,7 +65,7 @@ class Gui:
 
     def _copy_files(self):
         self.after_copying = True
-        copy_files()
+        copy_files(self.order)
 
     def __init__(self, rules, initial_directory):
         # Исходная папка
