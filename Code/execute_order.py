@@ -16,14 +16,14 @@ def copy_files(order, project_folder, source_folder):
                         folder.folder,
                     )
                     if rules_for_file.is_folder:
-                        copy_folder(
+                        is_successful = copy_folder(
                             source_path=source_folder,
                             source_name=rules_for_file.name,
                             target_path=target_path,
                             target_name=rules_for_file.name,
                         )
                     else:
-                        copy_file(
+                        is_successful = copy_file(
                             source_path=source_folder,
                             source_name=rules_for_file.name,
                             target_path=target_path,
