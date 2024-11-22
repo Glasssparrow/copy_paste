@@ -3,7 +3,6 @@ from Code.CONSTANTS import (
     TARGET_FOLDERS,
     MASKS,
     NAMES_AND_RULES,
-    ONLY_NAMES,
 )
 
 
