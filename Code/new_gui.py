@@ -108,7 +108,7 @@ class Gui:
                                column=0, row=2)
 
         # Выбор формата вывода информации
-        self.radiobutton_position = tk.IntVar(value=2)
+        self.radiobutton_position = tk.IntVar(value=4)
         self._radiobutton0 = tk.Radiobutton(
             text="полная информация",
             variable=self.radiobutton_position,
