@@ -4,7 +4,7 @@ from tkinter import Button, Tk, Label
 from Code.CONSTANTS import (
     FULL_INFO,
     TARGET_FOLDERS,
-    MASKS,
+    # MASKS,
     NAMES_AND_RULES,
     ONLY_NAMES,
 )
@@ -114,13 +114,15 @@ class Gui:
             variable=self.radiobutton_position,
             value=FULL_INFO, command=self._recreate_info_for_user)
         self._radiobutton1 = tk.Radiobutton(
-            text="целевые папки, выбранные подпапки (после копирования)",
+            # TODO
+            # добавить вывод выбранных подпапок.
+            text="имена файлов, целевые папки",
             variable=self.radiobutton_position,
             value=TARGET_FOLDERS, command=self._recreate_info_for_user)
-        self._radiobutton2 = tk.Radiobutton(
-            text="псевдонимы, выбранные подпапки (после копирования)",
-            variable=self.radiobutton_position,
-            value=MASKS, command=self._recreate_info_for_user)
+        # self._radiobutton2 = tk.Radiobutton(
+        #     text="псевдонимы, выбранные подпапки (после копирования)",
+        #     variable=self.radiobutton_position,
+        #     value=MASKS, command=self._recreate_info_for_user)
         self._radiobutton3 = tk.Radiobutton(
             text="имена файлов и правила копирования",
             variable=self.radiobutton_position,
@@ -131,7 +133,7 @@ class Gui:
             value=ONLY_NAMES, command=self._recreate_info_for_user)
         self._radiobutton0.grid(column=0, row=3)
         self._radiobutton1.grid(column=1, row=3)
-        self._radiobutton2.grid(column=2, row=3)
+        # self._radiobutton2.grid(column=2, row=3)
         self._radiobutton3.grid(column=3, row=3)
         self._radiobutton4.grid(column=4, row=3)
 
