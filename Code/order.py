@@ -49,26 +49,22 @@ class Матрешка:
         if was_copied:
             if done == 0:
                 self.status = NOT_SUCCESSFUL
-            elif done == 0.5:
+            elif 0 < done < 1:
                 self.status = PARTIALLY_SUCCESSFUL
             elif done == 1:
                 self.status = SUCCESSFUL
         else:
             if done == 0:
                 self.status = SHOULD_NOT_BE_COPIED
-            elif done == 0.5:
+            elif 0 < done < 1:
                 self.status = SHOULD_BE_COPIED_PARTIALLY
             elif done == 1:
                 self.status = SHOULD_BE_COPIED
 
     def _how_much_done(self, done, not_done):
         self._validate_done_not_done(done, not_done)
-        if not_done == 0:
-            return 1
-        elif done == 0:
-            return 0
-        else:
-            return 0.5
+        result = done/(done+not_done)
+        return result
 
     @staticmethod
     def _validate_done_not_done(done, not_done):
@@ -131,10 +127,10 @@ class FoldersForPath(Матрешка):
 
     def _how_much_done(self, done, not_done):
         self._validate_done_not_done(done, not_done)
-        if done >= 0:
+        result = done / (done + not_done)
+        if result > 0:
             return 1
-        else:
-            return 0
+        return result
 
 
 # Отдельная папка.
