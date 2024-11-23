@@ -29,3 +29,4 @@ def copy_files(order, project_folder, source_folder):
                             target_path=target_path,
                             target_name=rules_for_file.name,
                         )
+                    folder.set_status(is_successful)
