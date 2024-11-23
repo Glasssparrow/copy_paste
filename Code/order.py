@@ -2,9 +2,9 @@ from Code.CONSTANTS import (
     SHOULD_BE_COPIED,
     SHOULD_BE_COPIED_PARTIALLY,
     SHOULD_NOT_BE_COPIED,
-    SUCCESFUL,
+    SUCCESSFUL,
     PARTIALLY_SUCCESFUL,
-    NOT_SUCCESFUL,
+    NOT_SUCCESSFUL,
     WASNT_COPIED,
     WAS_COPIED,
     YES,
@@ -48,11 +48,11 @@ class Матрешка:
         done = self._how_much_done(successful, not_successful)
         if was_copied:
             if done == 0:
-                self.status = NOT_SUCCESFUL
+                self.status = NOT_SUCCESSFUL
             elif done == 0.5:
                 self.status = PARTIALLY_SUCCESFUL
             elif done == 1:
-                self.status = SUCCESFUL
+                self.status = SUCCESSFUL
         else:
             if done == 0:
                 self.status = SHOULD_NOT_BE_COPIED
@@ -146,9 +146,9 @@ class Folder:
 
     def set_status(self, result):
         if result:
-            self.status = SUCCESFUL
+            self.status = SUCCESSFUL
         else:
-            self.status = NOT_SUCCESFUL
+            self.status = NOT_SUCCESSFUL
 
 
 def spread_order_status(order):
