@@ -40,7 +40,17 @@ def _add_rulename(
     after_copying, mode,
 ):
     if after_copying:
-        pass
+        if mode in [
+            NAMES_AND_RULES,
+        ]:
+            info_list.append(
+                f"{paths_for_rule.rule.name} результат - "
+                f"{paths_for_rule.status}"
+            )
+        else:
+            info_list.append(
+                f"{paths_for_rule.rule.name}"
+            )
     else:
         if mode in [
             FULL_INFO,
@@ -54,7 +64,18 @@ def _add_path(
     after_copying, mode,
 ):
     if after_copying:
-        pass
+        if mode in [
+            TARGET_FOLDERS,
+            MASKS,
+        ]:
+            info_list.append(
+                f"{folders_for_path.path} результат - "
+                f"{folders_for_path.status}"
+            )
+        else:
+            info_list.append(
+                f"{folders_for_path.path}"
+            )
     else:
         if mode in [
             FULL_INFO,
@@ -69,7 +90,13 @@ def _add_folder(
     after_copying, mode,
 ):
     if after_copying:
-        pass
+        if mode in [
+            FULL_INFO,
+        ]:
+            info_list.append(
+                f"{folder.folder} результат - "
+                f"{folder.status}."
+            )
     else:
         if mode in [
             FULL_INFO,
