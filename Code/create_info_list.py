@@ -47,7 +47,9 @@ def _add_rulename(
                 f"{paths_for_rule.rule.name} результат - "
                 f"{paths_for_rule.status}"
             )
-        else:
+        elif mode in [
+            FULL_INFO,
+        ]:
             info_list.append(
                 f"{paths_for_rule.rule.name}"
             )
@@ -72,7 +74,9 @@ def _add_path(
                 f"{folders_for_path.path} результат - "
                 f"{folders_for_path.status}"
             )
-        else:
+        elif mode in [
+            FULL_INFO,
+        ]:
             info_list.append(
                 f"{folders_for_path.path}"
             )
