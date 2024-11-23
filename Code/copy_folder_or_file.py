@@ -17,10 +17,13 @@ def copy_folder(
         source_name,
     )
     if path.isdir(target_path):
-        if path.isdir(target):
-            shutil.rmtree(target)
-        shutil.copytree(str(source), str(target))
-        return True
+        try:
+            if path.isdir(target):
+                shutil.rmtree(target)
+            shutil.copytree(str(source), str(target))
+            return True
+        except:
+            return False
     else:
         return False
 
@@ -38,7 +41,10 @@ def copy_file(
         source_name,
     )
     if path.isdir(target_path):
-        shutil.copy(str(source), str(target))
-        return True
+        try:
+            shutil.copy(str(source), str(target))
+            return True
+        except:
+            return False
     else:
         return False
