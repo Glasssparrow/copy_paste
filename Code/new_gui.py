@@ -12,6 +12,7 @@ from Code.get_list_of_folders_or_files import (
     get_list_of_folders_names,
     get_list_of_files_names,
 )
+from Code.order import spread_order_status
 from Code.execute_order import copy_files
 from Code.order import Order
 from Code.create_order import fill_order
@@ -68,6 +69,8 @@ class Gui:
         copy_files(order=self.order,
                    project_folder=self.project_name,
                    source_folder=self.chosen_directory,)
+        spread_order_status(self.order)
+        self._recreate_info_for_user()
 
     def __init__(self, rules, initial_directory):
         # Исходная папка

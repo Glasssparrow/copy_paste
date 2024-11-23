@@ -11,43 +11,70 @@ def _add_filename(
     info_list, rules_for_file,
     after_copying, mode,
 ):
-    if rules_for_file.is_folder:
-        info_list.append(f"(папка){rules_for_file.name}")
+    if after_copying:
+        if mode in [ONLY_NAMES]:
+            if rules_for_file.is_folder:
+                info_list.append(
+                    f"(папка){rules_for_file.name} результат - "
+                    f"{rules_for_file.status}"
+                )
+            else:
+                info_list.append(
+                    f"{rules_for_file.name} результат - "
+                    f"{rules_for_file.status}"
+                )
+        else:
+            if rules_for_file.is_folder:
+                info_list.append(f"(папка){rules_for_file.name}")
+            else:
+                info_list.append(rules_for_file.name)
     else:
-        info_list.append(rules_for_file.name)
+        if rules_for_file.is_folder:
+            info_list.append(f"(папка){rules_for_file.name}")
+        else:
+            info_list.append(rules_for_file.name)
 
 
 def _add_rulename(
     info_list, paths_for_rule,
     after_copying, mode,
 ):
-    if mode in [
-        FULL_INFO,
-        NAMES_AND_RULES,
-    ]:
-        info_list.append(paths_for_rule.rule.name)
+    if after_copying:
+        pass
+    else:
+        if mode in [
+            FULL_INFO,
+            NAMES_AND_RULES,
+        ]:
+            info_list.append(paths_for_rule.rule.name)
 
 
 def _add_path(
     info_list, folders_for_path,
     after_copying, mode,
 ):
-    if mode in [
-        FULL_INFO,
-        TARGET_FOLDERS,
-        MASKS,
-    ]:
-        info_list.append(folders_for_path.path)
+    if after_copying:
+        pass
+    else:
+        if mode in [
+            FULL_INFO,
+            TARGET_FOLDERS,
+            MASKS,
+        ]:
+            info_list.append(folders_for_path.path)
 
 
 def _add_folder(
     info_list, folder,
     after_copying, mode,
 ):
-    if mode in [
-        FULL_INFO,
-    ]:
-        info_list.append(folder.folder)
+    if after_copying:
+        pass
+    else:
+        if mode in [
+            FULL_INFO,
+        ]:
+            info_list.append(folder.folder)
 
 
 def get_info_list(mode, order, after_copying: bool):

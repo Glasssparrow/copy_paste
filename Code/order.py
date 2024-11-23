@@ -149,3 +149,12 @@ class Folder:
             self.status = WAS_COPIED
         else:
             self.status = WASNT_COPIED
+
+
+def spread_order_status(order):
+    for rules_for_file in order.data:
+        for paths_for_rule in rules_for_file.data:
+            for folders_for_path in paths_for_rule.data:
+                folders_for_path.ask_status()
+            paths_for_rule.ask_status()
+        rules_for_file.ask_status()
