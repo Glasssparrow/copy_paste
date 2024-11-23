@@ -146,9 +146,9 @@ class Folder:
 
     def set_status(self, result):
         if result:
-            self.status = WAS_COPIED
+            self.status = SUCCESFUL
         else:
-            self.status = WASNT_COPIED
+            self.status = NOT_SUCCESFUL
 
 
 def spread_order_status(order):
