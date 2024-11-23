@@ -3,7 +3,7 @@ from Code.CONSTANTS import (
     SHOULD_BE_COPIED_PARTIALLY,
     SHOULD_NOT_BE_COPIED,
     SUCCESSFUL,
-    PARTIALLY_SUCCESFUL,
+    PARTIALLY_SUCCESSFUL,
     NOT_SUCCESSFUL,
     WASNT_COPIED,
     WAS_COPIED,
@@ -50,7 +50,7 @@ class Матрешка:
             if done == 0:
                 self.status = NOT_SUCCESSFUL
             elif done == 0.5:
-                self.status = PARTIALLY_SUCCESFUL
+                self.status = PARTIALLY_SUCCESSFUL
             elif done == 1:
                 self.status = SUCCESSFUL
         else:
