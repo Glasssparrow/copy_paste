@@ -141,5 +141,11 @@ class FoldersForPath(Матрешка):
 class Folder:
 
     def __init__(self, folder: str):
-        self.status = "should be copied"
+        self.status = SHOULD_BE_COPIED
         self.folder = folder
+
+    def set_status(self, result):
+        if result:
+            self.status = WAS_COPIED
+        else:
+            self.status = WASNT_COPIED
