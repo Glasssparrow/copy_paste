@@ -7,7 +7,7 @@ from Code.CONSTANTS import (
 )
 from Code.rule import get_orders
 from Code.error_message_box import ErrorGui
-from Code.new_gui import Gui
+from Code.gui import Gui
 
 
 try:
