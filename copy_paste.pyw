@@ -9,6 +9,8 @@ from Code.rule import get_orders
 from Code.error_message_box import ErrorGui
 from Code.gui import Gui
 
+# TODO
+# Добавить копирование файлов из подпапок.
 
 try:
     # Читаем инструкции: какие файлы куда копировать.
