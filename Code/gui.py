@@ -65,7 +65,6 @@ class Gui:
                 extra_files = get_list_of_files_names(path)
                 for file in extra_files:
                     files.append(os.path.join(subfolder, file))
-        print(files)
         self.order = Order()
         fill_order(
             order=self.order,
