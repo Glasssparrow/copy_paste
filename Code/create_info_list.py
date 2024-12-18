@@ -5,6 +5,7 @@ from Code.CONSTANTS import (
     NAMES_AND_RULES,
     ONLY_NAMES,
 )
+from  os.path import join
 
 
 def _add_filename(
@@ -30,9 +31,22 @@ def _add_filename(
                 info_list.append(rules_for_file.name)
     else:
         if rules_for_file.is_folder:
-            info_list.append(f"(папка){rules_for_file.name}")
+            if mode in [FULL_INFO]:
+                info_list.append(
+                    f"(папка)"
+                    f"{join(rules_for_file.path, 
+                            rules_for_file.name)}"
+                )
+            else:
+                info_list.append(f"(папка){rules_for_file.name}")
         else:
-            info_list.append(rules_for_file.name)
+            if mode in [FULL_INFO]:
+                info_list.append(
+                    f"{join(rules_for_file.path,
+                            rules_for_file.name)}"
+                )
+            else:
+                info_list.append(f"{rules_for_file.name}")
 
 
 def _add_rulename(
