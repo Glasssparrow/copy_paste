@@ -56,6 +56,16 @@ class Gui:
         self._text_folder.configure(text=self.chosen_directory)
         folders = get_list_of_folders_names(self.chosen_directory)
         files = get_list_of_files_names(self.chosen_directory)
+        for subfolder in self.allowed_folders:
+            path = os.path.join(self.chosen_directory, subfolder)
+            if os.path.isdir(path):
+                extra_folders = get_list_of_folders_names(path)
+                for folder in extra_folders:
+                    folder.append(os.path.join(subfolder, folder))
+                extra_files = get_list_of_files_names(path)
+                for file in extra_files:
+                    files.append(os.path.join(subfolder, file))
+        print(files)
         self.order = Order()
         fill_order(
             order=self.order,
@@ -67,8 +77,7 @@ class Gui:
     def _copy_files(self):
         self.after_copying = True
         copy_files(order=self.order,
-                   project_folder=self.project_name,
-                   source_folder=self.chosen_directory,)
+                   project_folder=self.project_name,)
         spread_order_status(self.order)
         self._recreate_info_for_user()
 

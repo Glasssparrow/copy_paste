@@ -1,4 +1,10 @@
-from Code.order import *
+from Code.order import (
+    RulesForName,
+    PathsForRule,
+    FoldersForPath,
+    Folder,
+)
+from os.path import basename, dirname, join
 
 
 def add_element_to_order(
@@ -6,7 +12,9 @@ def add_element_to_order(
             element, is_folder,
             source_folder,
         ):
-    folder_or_file = RulesForName(name=element, is_folder=is_folder)
+    folder_or_file = RulesForName(
+        name=element, is_folder=is_folder, path=source_folder,
+    )
     order.append(folder_or_file)
     for rule in rules:
         paths_for_rule = PathsForRule(rule=rule)
@@ -23,15 +31,18 @@ def process_element(
         rules, source_folder,
         order, element, is_folder: bool
 ):
+    element_name = basename(element)
+    element_dir = dirname(element)
+    path_to_element = join(source_folder, element_dir)
     rules_should_be_applied = []
     for rule in rules:
-        if rule.should_be_copied(element, is_folder):
+        if rule.should_be_copied(element_name, is_folder):
             rules_should_be_applied.append(rule)
     if rules_should_be_applied:
         add_element_to_order(
             rules=rules_should_be_applied, order=order,
-            element=element, is_folder=is_folder,
-            source_folder=source_folder,
+            element=element_name, is_folder=is_folder,
+            source_folder=path_to_element,
         )
 
 

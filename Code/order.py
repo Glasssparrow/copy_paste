@@ -104,9 +104,10 @@ class Order(Матрешка):
 # Отдельный файл(или папка). Содержит правила подходящие для него.
 class RulesForName(Матрешка):
 
-    def __init__(self, is_folder: bool, name: str):
+    def __init__(self, is_folder: bool, name: str, path: str):
         super().__init__()
         self.name = name
+        self.path = path
         self.is_folder = is_folder
 
 
