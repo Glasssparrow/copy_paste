@@ -32,7 +32,8 @@ class Rule:
         self.firsts_parts = None  # Начала имен
         self.last_parts = None  # Окончания имен
 
-    def should_be_copied(self, name_with_extension, is_folder: bool, full_path=False):
+    def should_be_copied(self, name_with_extension,
+                         is_folder: bool, full_path=False):
         if is_folder and not self.can_copy_folders:
             return False
         # Если получили полный путь, то отделяем имя.
