@@ -72,9 +72,11 @@ class Gui:
         spread_order_status(self.order)
         self._recreate_info_for_user()
 
-    def __init__(self, rules, initial_directory):
+    def __init__(self, rules,
+                 initial_directory, folders_allowed_to_scan):
         # Исходная папка
         self.initial_directory = initial_directory
+        self.allowed_folders = folders_allowed_to_scan
         self.chosen_directory = None
         self.rules = rules
         # Оформление окна
