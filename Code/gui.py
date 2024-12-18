@@ -61,7 +61,7 @@ class Gui:
             if os.path.isdir(path):
                 extra_folders = get_list_of_folders_names(path)
                 for folder in extra_folders:
-                    folder.append(os.path.join(subfolder, folder))
+                    folders.append(os.path.join(subfolder, folder))
                 extra_files = get_list_of_files_names(path)
                 for file in extra_files:
                     files.append(os.path.join(subfolder, file))
