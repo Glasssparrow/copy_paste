@@ -22,7 +22,7 @@ try:
     )[0]
     allowed_to_scan = get_list_of_strings_from_file(
         FOLDER_WITH_ORDERS+"/"+SOURCE_FOLDERS
-    )[0]
+    )
 # Если произошла ошибка, выводим сообщение.
 except Exception as error:
     gui = ErrorGui(error.args)
