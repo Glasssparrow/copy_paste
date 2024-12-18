@@ -22,7 +22,7 @@ import os
 
 class Gui:
 
-    title_text = "Копипастер 3.0"
+    title_text = "Копипастер 4.0"
 
     def _recreate_info_for_user(self):
         self._text_warning.destroy()
